@@ -4,12 +4,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ShopComponent} from './shop/shop.component';
 import {WalletComponent} from './wallet/wallet.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'wallet', component: WalletComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'}
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
