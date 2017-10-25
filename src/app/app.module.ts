@@ -4,11 +4,15 @@ import { AppComponent } from './app.component';
 import {ClarityModule} from 'clarity-angular';
 import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { ShopComponent } from './shop/shop.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ShopComponent,
+    WalletComponent
   ],
   imports: [
     BrowserModule,
