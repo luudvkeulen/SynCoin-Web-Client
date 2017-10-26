@@ -13,7 +13,10 @@ import {WalletReceiveComponent} from './wallet-receive/wallet-receive.component'
 import {WalletTransactionsComponent} from './wallet-transactions/wallet-transactions.component';
 
 const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {
+    path: 'home',
+    component: HomeComponent
+  },
   {
     path: 'shop',
     component: ShopComponent,
@@ -60,8 +63,15 @@ const appRoutes: Routes = [
       }
     ]
   },
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', component: PageNotFoundComponent}
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
