@@ -5,10 +5,25 @@ import {HomeComponent} from './home/home.component';
 import {ShopComponent} from './shop/shop.component';
 import {WalletComponent} from './wallet/wallet.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ShopProductsComponent} from './shop-products/shop-products.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'shop', component: ShopComponent},
+  {
+    path: 'shop',
+    component: ShopComponent,
+    children: [
+      {
+        path: 'products',
+        component: ShopProductsComponent
+      },
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      }
+    ]
+  },
   {path: 'wallet', component: WalletComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

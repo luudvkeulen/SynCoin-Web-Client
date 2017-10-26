@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ShopProductsComponent } from './shop-products/shop-products.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeComponent,
     ShopComponent,
     WalletComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ShopProductsComponent
   ],
   imports: [
     BrowserModule,
