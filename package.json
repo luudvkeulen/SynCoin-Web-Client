@@ -23,6 +23,7 @@
     "@angular/router": "^4.4.6",
     "@webcomponents/custom-elements": "^1.0.4",
     "angular2-qrcode": "^2.0.1",
+    "angular2-qrscanner": "https://github.com/luudvkeulen/angular2-qrscanner/tarball/master",
     "clarity-angular": "^0.10.10",
     "clarity-icons": "^0.10.10",
     "clarity-ui": "^0.10.10",
