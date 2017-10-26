@@ -1,28 +1,30 @@
-<header class="header header-1">
-  <div class="branding">
-    <a routerLink="/home" class="nav-link">
-      <!--<clr-icon shape="vm-bug"></clr-icon>-->
-      <span class="title">Synthereum</span>
-    </a>
-  </div>
-  <div class="header-nav">
-    <a routerLink="home" routerLinkActive="active" class="nav-link"><span class="nav-text">Home</span></a>
-    <a routerLink="shop" routerLinkActive="active" class="nav-link"><span class="nav-text">Winkel</span></a>
-    <a routerLink="wallet" routerLinkActive="active" class="nav-link"><span class="nav-text">Wallet</span></a>
-  </div>
-  <div class="header-actions">
-    <clr-dropdown>
-      <button class="nav-icon" clrDropdownTrigger>
-        <clr-icon shape="user"></clr-icon>
-        <clr-icon shape="caret down"></clr-icon>
-      </button>
-      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-        <a routerLink="/" clrDropdownItem>Mijn account</a>
-        <a routerLink="/" clrDropdownItem>Instellingen</a>
-        <a routerLink="/" clrDropdownItem>Inloggen</a>
-      </clr-dropdown-menu>
-    </clr-dropdown>
-  </div>
-</header>
-<router-outlet></router-outlet>
+<clr-main-container class="main-container">
+  <clr-header class="header-1 header">
+    <div class="branding">
+      <a routerLink="/home" class="nav-link">
+        <!--<clr-icon shape="vm-bug"></clr-icon>-->
+        <span class="title">Synthereum</span>
+      </a>
+    </div>
+    <div class="header-nav" [clr-nav-level]="1">
+      <a routerLink="home" routerLinkActive="active" class="nav-link"><span class="nav-text">Home</span></a>
+      <a routerLink="shop" routerLinkActive="active" class="nav-link"><span class="nav-text">Winkel</span></a>
+      <a routerLink="wallet" routerLinkActive="active" class="nav-link"><span class="nav-text">Wallet</span></a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger>
+          <clr-icon shape="user"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a routerLink="/" clrDropdownItem>Mijn account</a>
+          <a routerLink="/" clrDropdownItem>Instellingen</a>
+          <a routerLink="/" clrDropdownItem>Inloggen</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-header>
+  <router-outlet></router-outlet>
+</clr-main-container>
 
