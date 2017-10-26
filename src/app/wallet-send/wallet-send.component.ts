@@ -12,8 +12,8 @@ export class WalletSendComponent implements OnInit {
   constructor() {
   }
 
-  onQrCodeScanned(event): void {
-    console.log('Scanned');
+  onQrCodeScanned(event: String): void {
+    console.log('Scanned ', event);
     this.qrCode = event;
   }
 

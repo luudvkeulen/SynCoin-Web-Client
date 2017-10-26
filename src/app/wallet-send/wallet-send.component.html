@@ -1,8 +1,17 @@
 <div class="content-container">
   <div class="content-area">
-    <qr-scanner [debug]="true" [mirror]="true" [stopAfterScan]="true" [updateTime]="500"
+    <qr-scanner [mirror]="true" [stopAfterScan]="true" [updateTime]="500"
                 [canvasWidth]="320" [canvasHeight]="320"
                 (onRead)="onQrCodeScanned($event)"
                 *ngIf="!qrCode"></qr-scanner>
+    <form>
+      <section class="form-block">
+        <label>Overmaken</label>
+        <div class="form-group">
+          <label for="walletId">Wallet id</label>
+          <input type="text" id="walletId" placeholder="Typ of scan een wallet id" value="{{qrCode}}">
+        </div>
+      </section>
+    </form>
   </div>
 </div>
