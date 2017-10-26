@@ -3,6 +3,6 @@
     <qr-scanner [debug]="true" [mirror]="true" [stopAfterScan]="true" [updateTime]="500"
                 [canvasWidth]="320" [canvasHeight]="320"
                 (onRead)="onQrCodeScanned($event)"
-                *ngIf="qrCode"></qr-scanner>
+                *ngIf="!qrCode"></qr-scanner>
   </div>
 </div>
