@@ -16,6 +16,7 @@ import {WalletTransactionsComponent} from './wallet-transactions/wallet-transact
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {QRCodeModule} from 'angular2-qrcode';
+import {QrScannerModule} from 'angular2-qrscanner/dist';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {QRCodeModule} from 'angular2-qrcode';
     BrowserModule,
     ClarityModule,
     AppRoutingModule,
-    QRCodeModule
+    QRCodeModule,
+    QrScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
