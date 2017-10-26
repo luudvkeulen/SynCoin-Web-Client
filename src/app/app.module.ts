@@ -17,6 +17,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {QRCodeModule} from 'angular2-qrcode';
 import {QrScannerModule} from 'angular2-qrscanner/dist';
+import {TransactionComponent} from './transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {QrScannerModule} from 'angular2-qrscanner/dist';
     WalletReceiveComponent,
     WalletTransactionsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
