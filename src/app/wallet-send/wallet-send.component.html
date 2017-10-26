@@ -1,5 +1,5 @@
 <div class="content-container">
   <div class="content-area">
-    <qr-scanner [mirror]="false" [stopAfterScan]="true"></qr-scanner>
+    <qr-scanner [mirror]="true" [stopAfterScan]="true" (onRead)="onQrCodeScanned($event)"></qr-scanner>
   </div>
 </div>

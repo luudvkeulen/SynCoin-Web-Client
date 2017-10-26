@@ -10,6 +10,10 @@ export class WalletSendComponent implements OnInit {
   constructor() {
   }
 
+  onQrCodeScanned(event): void {
+    console.log('Scanned');
+  }
+
   ngOnInit() {
   }
 
