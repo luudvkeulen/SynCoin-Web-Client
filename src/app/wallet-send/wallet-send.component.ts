@@ -7,7 +7,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class WalletSendComponent implements OnInit {
 
+  qrCode: String;
+
   constructor() {
+  }
+
+  onQrCodeScanned(event: String): void {
+    console.log('Scanned ', event);
+    this.qrCode = event;
   }
 
   ngOnInit() {

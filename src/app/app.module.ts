@@ -15,6 +15,9 @@ import {WalletReceiveComponent} from './wallet-receive/wallet-receive.component'
 import {WalletTransactionsComponent} from './wallet-transactions/wallet-transactions.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {QRCodeModule} from 'angular2-qrcode';
+import {QrScannerModule} from 'angular2-qrscanner/dist';
+import {TransactionComponent} from './transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +33,15 @@ import {RegisterComponent} from './register/register.component';
     WalletReceiveComponent,
     WalletTransactionsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
     ClarityModule,
-    AppRoutingModule
+    AppRoutingModule,
+    QRCodeModule,
+    QrScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
