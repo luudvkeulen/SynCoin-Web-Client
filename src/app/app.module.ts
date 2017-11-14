@@ -18,6 +18,7 @@ import {RegisterComponent} from './register/register.component';
 import {QRCodeModule} from 'angular2-qrcode';
 import {QrScannerModule} from 'angular2-qrscanner/dist';
 import {TransactionComponent} from './transaction/transaction.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import {TransactionComponent} from './transaction/transaction.component';
     ClarityModule,
     AppRoutingModule,
     QRCodeModule,
-    QrScannerModule
+    QrScannerModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
