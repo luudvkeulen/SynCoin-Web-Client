@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PasswordValidation} from './password-validation';
-import {User} from './user.model';
 
 @Component({
   selector: 'app-register',
@@ -11,22 +10,30 @@ import {User} from './user.model';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  user: User;
+  fb: FormBuilder;
 
   constructor(fb: FormBuilder) {
-    this.user = new User();
-    this.registerForm = fb.group({
-      'email': [this.user.email, Validators.required],
-      'surname': [this.user.surname, Validators.required],
-      'lastname': [this.user.lastname, Validators.required],
-      'phone': [this.user.phone, Validators.required],
-      'company': [this.user.company, Validators.required],
-      'address': [this.user.address, Validators.required],
-      'password': [this.user.password, Validators.required],
-      'passwordvalidation': [this.user.passwordvalidation, Validators.required]
+    this.fb = fb;
+    this.createForm();
+  }
+
+  createForm() {
+    this.registerForm = this.fb.group({
+      'email': ['', Validators.required],
+      'surname': ['', Validators.required],
+      'lastname': ['', Validators.required],
+      'phone': ['', Validators.required],
+      'company': ['', Validators.required],
+      'address': ['', Validators.required],
+      'password': ['', Validators.required],
+      'passwordvalidation': ['', Validators.required]
     }, {
       validator: PasswordValidation.MatchPassword
     });
+  }
+
+  onSubmit(value: String) {
+    console.log('Submit');
   }
 
   ngOnInit() {

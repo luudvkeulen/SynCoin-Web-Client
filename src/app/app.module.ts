@@ -19,6 +19,7 @@ import {QRCodeModule} from 'angular2-qrcode';
 import {QrScannerModule} from 'angular2-qrscanner/dist';
 import {TransactionComponent} from './transaction/transaction.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     QRCodeModule,
     QrScannerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

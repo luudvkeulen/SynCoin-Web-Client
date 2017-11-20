@@ -1,7 +1,7 @@
 <div class="content-container">
   <div class="content-area">
     <div class="row flex-items-xs-center">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" novalidate>
         <h1>Maak uw account aan</h1>
         <div class="form-group">
           <label for="email">E-mail adres</label>
@@ -39,6 +39,7 @@
           <button type="submit" class="btn btn-primary">Registreren</button>
         </div>
       </form>
+      {{registerForm.value | json}}
     </div>
   </div>
 </div>
