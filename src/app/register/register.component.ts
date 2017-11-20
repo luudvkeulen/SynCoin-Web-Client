@@ -1,18 +1,20 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PasswordValidation} from './password-validation';
+import {AccountService} from '../account.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  providers: [AccountService],
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   fb: FormBuilder;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private accountService: AccountService) {
     this.fb = fb;
     this.createForm();
   }
@@ -34,6 +36,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(value: String) {
     console.log('Submit');
+    console.log(this.registerForm.getRawValue());
+    this.accountService.registerUser(this.registerForm.getRawValue()).subscribe(success => {
+      console.log('Success');
+    }, errror => {
+      console.log('Error message');
+    });
   }
 
   ngOnInit() {
