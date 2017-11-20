@@ -5,7 +5,17 @@
         <h1>Maak uw account aan</h1>
         <div class="form-group">
           <label for="email">E-mail adres</label>
-          <input type="email" id="email" placeholder="naam@domain.com" formControlName="email">
+          <label for="email" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
+                 [class.invalid]="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
+            <input type="email" id="email" placeholder="naam@domain.com" formControlName="email">
+            <span class="tooltip-content" *ngIf="registerForm.controls['email'].hasError('required')">
+              This field cannot be empty!
+            </span>
+            <span class="tooltip-content" *ngIf="registerForm.controls['email'].hasError('email')">
+              Not a valid email
+            </span>
+          </label>
         </div>
         <div class="form-group">
           <label for="surname">Voornaam</label>
@@ -39,7 +49,6 @@
           <button type="submit" class="btn btn-primary">Registreren</button>
         </div>
       </form>
-      {{registerForm.value | json}}
     </div>
   </div>
 </div>
