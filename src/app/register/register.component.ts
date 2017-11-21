@@ -13,6 +13,7 @@ import {AccountService} from '../account.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   fb: FormBuilder;
+  formError: String;
 
   constructor(fb: FormBuilder, private accountService: AccountService) {
     this.fb = fb;
@@ -46,7 +47,7 @@ export class RegisterComponent implements OnInit {
     this.accountService.registerUser(this.registerForm.getRawValue()).subscribe(success => {
       console.log('Success');
     }, errror => {
-      console.log('Error message');
+      this.formError = 'Er ging iets fout';
     });
   }
 

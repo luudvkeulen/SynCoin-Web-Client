@@ -104,6 +104,17 @@
           </label>
         </div>
 
+        <div class="alert alert-danger" *ngIf="formError && formError.length > 0">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+              </div>
+              <span class="alert-text">{{formError}}</span>
+            </div>
+          </div>
+        </div>
+
         <div class="button-wrapper">
           <button type="submit" class="btn btn-primary">Registreren</button>
         </div>
