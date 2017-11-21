@@ -1,5 +1,22 @@
 <div class="content-container">
   <div class="content-area">
-    Products
+
+  <div>
+    <div *ngFor="let product of products" class="row">
+      <app-shop-product [product]="product"></app-shop-product>
+    </div>
   </div>
+  </div>
+
+  <nav class="sidenav">
+    <section class="nav-group collapsible">
+      <input id="products" type="checkbox">
+      <label for="products">Products</label>
+      <ul class="nav-list">
+        <li><a class="nav-link">Bier</a></li>
+        <li><a class="nav-link">Vlaggen</a></li>
+        <li><a class="nav-link">Kleding</a></li>
+      </ul>
+    </section>
+  </nav>
 </div>
