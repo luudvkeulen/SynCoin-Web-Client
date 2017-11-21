@@ -3,48 +3,107 @@
     <div class="row flex-items-xs-center">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" novalidate>
         <h1>Maak uw account aan</h1>
+
         <div class="form-group">
-          <label for="email">E-mail adres</label>
+          <label for="email" class="required">E-mail adres</label>
           <label for="email" aria-haspopup="true" role="tooltip"
-                 class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
+                 class="tooltip tooltip-validation tooltip-md"
                  [class.invalid]="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
             <input type="email" id="email" placeholder="naam@domain.com" formControlName="email">
             <span class="tooltip-content" *ngIf="registerForm.controls['email'].hasError('required')">
-              This field cannot be empty!
+              Dit veld is verplicht
             </span>
             <span class="tooltip-content" *ngIf="registerForm.controls['email'].hasError('email')">
-              Not a valid email
+              Geen valide e-mail adres
             </span>
           </label>
         </div>
+
         <div class="form-group">
-          <label for="surname">Voornaam</label>
-          <input type="text" id="surname" placeholder="Voornaam" formControlName="surname">
+          <label for="name" class="required">Voornaam</label>
+          <label for="name" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-md"
+                 [class.invalid]="!registerForm.controls['name'].valid && registerForm.controls['name'].touched">
+            <input type="text" id="name" placeholder="Voornaam" formControlName="name">
+            <span class="tooltip-content" *ngIf="registerForm.controls['name'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+          </label>
         </div>
+
         <div class="form-group">
-          <label for="lastname">Achternaam</label>
-          <input type="text" id="lastname" placeholder="Achternaam" formControlName="lastname">
+          <label for="lastname" class="required">Achternaam</label>
+          <label for="lastname" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-md"
+                 [class.invalid]="!registerForm.controls['lastname'].valid && registerForm.controls['lastname'].touched">
+            <input type="text" id="lastname" placeholder="Achternaam" formControlName="lastname">
+            <span class="tooltip-content" *ngIf="registerForm.controls['lastname'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+          </label>
         </div>
+
         <div class="form-group">
-          <label for="phone">Telefoon</label>
-          <input type="text" id="phone" placeholder="0612345678" formControlName="phone">
+          <label for="phone" class="required">Telefoon</label>
+          <label for="phone" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-md"
+                 [class.invalid]="!registerForm.controls['phone'].valid && registerForm.controls['phone'].touched">
+            <input type="text" id="phone" placeholder="0612345678" formControlName="phone">
+            <span class="tooltip-content" *ngIf="registerForm.controls['phone'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+          </label>
         </div>
+
         <div class="form-group">
-          <label for="company">Bedrijf</label>
-          <input type="text" id="company" placeholder="Bedrijfsnaam" formControlName="company">
+          <label for="company" class="required">Bedrijf</label>
+          <label for="company" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-md"
+                 [class.invalid]="!registerForm.controls['company'].valid && registerForm.controls['company'].touched">
+            <input type="text" id="company" placeholder="Bedrijfsnaam" formControlName="company">
+            <span class="tooltip-content" *ngIf="registerForm.controls['company'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+          </label>
         </div>
+
         <div class="form-group">
-          <label for="address">Bedrijfsadres</label>
-          <input type="text" id="address" placeholder="Adres" formControlName="address">
+          <label for="address" class="required">Bedrijfsadres</label>
+          <label for="address" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-md"
+                 [class.invalid]="!registerForm.controls['address'].valid && registerForm.controls['address'].touched">
+            <input type="text" id="address" placeholder="Adres" formControlName="address">
+            <span class="tooltip-content" *ngIf="registerForm.controls['address'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+          </label>
         </div>
+
         <div class="form-group">
-          <label for="password1">Wachtwoord</label>
-          <input type="password" id="password1" placeholder="Wachtwoord" formControlName="password">
+          <label for="password" class="required">Wachtwoord</label>
+          <label for="password" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
+                 [class.invalid]="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">
+            <input type="password" id="password" placeholder="Wachtwoord" formControlName="password">
+            <span class="tooltip-content" *ngIf="registerForm.controls['password'].hasError('minlength')">
+              Password moet ten minste {{registerForm.controls['password'].getError('minlength')['requiredLength']}} karakters lang zijn
+            </span>
+          </label>
         </div>
+
         <div class="form-group">
-          <label for="password2">Wachtwoord herhaling</label>
-          <input type="password" id="password2" placeholder="Wachtwoord" formControlName="passwordvalidation">
+          <label for="passwordvalidation" class="required">Wachtwoord herhaling</label>
+          <label for="passwordvalidation" aria-haspopup="true" role="tooltip"
+                 class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
+                 [class.invalid]="!registerForm.controls['passwordvalidation'].valid && registerForm.controls['passwordvalidation'].touched">
+            <input type="password" id="passwordvalidation" placeholder="Wachtwoord"
+                   formControlName="passwordvalidation">
+            <span class="tooltip-content" *ngIf="registerForm.controls['passwordvalidation'].hasError('matchpassword')">
+              Wachtwoorden komen niet overeen
+            </span>
+          </label>
         </div>
+
         <div class="button-wrapper">
           <button type="submit" class="btn btn-primary">Registreren</button>
         </div>
