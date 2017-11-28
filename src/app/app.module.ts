@@ -20,6 +20,7 @@ import {QrScannerModule} from 'angular2-qrscanner/dist';
 import {TransactionComponent} from './transaction/transaction.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import { ShopProductComponent } from './shop-product/shop-product.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {HttpModule} from '@angular/http';
     WalletTransactionsComponent,
     LoginComponent,
     RegisterComponent,
-    TransactionComponent
+    TransactionComponent,
+    ShopProductComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import {WalletReceiveComponent} from './wallet-receive/wallet-receive.component'
 import {WalletTransactionsComponent} from './wallet-transactions/wallet-transactions.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
+import {Product} from './product';
 
 const appRoutes: Routes = [
   {
@@ -25,7 +26,21 @@ const appRoutes: Routes = [
     children: [
       {
         path: 'products',
-        component: ShopProductsComponent
+        component: ShopProductsComponent,
+        children: [
+          {
+            path: 'bier',
+            component: Product
+          },
+          {
+            path: 'vlag',
+            component: Product
+          },
+          {
+            path: 'paraplu',
+            component: Product
+          }
+        ]
       },
       {
         path: 'orders',
