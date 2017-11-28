@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class AccountService {
 
-  url = 'http://localhost:8080/user';
+  url = 'https://syncoin.luudvankeulen.nl/api/user';
 
   constructor(private http: Http) {
   }

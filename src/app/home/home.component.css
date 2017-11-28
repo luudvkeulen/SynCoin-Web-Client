@@ -1,0 +1,11 @@
+h1 {
+  text-align: center;
+}
+
+.walletCreateContainer {
+  text-align: center;
+}
+
+.walletCreateContainer button {
+  margin: 50px;
+}
