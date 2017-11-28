@@ -1,0 +1,19 @@
+.qr-code-wrapper {
+    text-align: center;
+}
+
+.qr-code-wrapper.disabled {
+    background-color: grey;
+}
+
+input.hidden {
+    display: none;
+}
+
+button.colorless, button.colorless:hover {
+    color: unset;
+}
+
+.tooltip-content {
+    text-transform: initial;
+}

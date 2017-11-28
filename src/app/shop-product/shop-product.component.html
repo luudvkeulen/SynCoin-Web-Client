@@ -6,15 +6,51 @@
     <div class="card-block">
       <div class="card-title">
         <img src="{{product.image}}" height="150px" width="150px">
-        <br>
-        {{product.description}}
+        <br> {{product.description}}
       </div>
       <div class="card-text">
         {{product.price}} token
       </div>
     </div>
     <div class="card-footer">
-      <button>Bestel</button>
+      <button (click)="orderProduct(product)">Bestel</button>
     </div>
   </div>
 </div>
+
+<!-- Copy to clipboard example (doesn't work in the modal) -->
+<!-- <div class="input-group">
+  <input type="text" class="form-control" [(ngModel)]="address" placeholder="content will be copy after click the copy button">
+  <span class="input-group-btn">
+    <button class="btn btn-link colorless" type="button" ngxClipboard [cbContent]="address">
+      <clr-tooltip>
+        <clr-icon class="is-solid" shape="copy" clrTooltipTrigger></clr-icon>
+        <clr-tooltip-content *clrIfOpen>
+          <span>Kopieer code naar klembord</span>
+        </clr-tooltip-content>
+      </clr-tooltip>
+    </button>
+  </span>
+</div> -->
+
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Wachten op betaling van {{product.name}}: {{product.description}} | {{countDown | async}}</h3>
+  <div class="modal-body">
+    <clr-alert *ngIf="orderCanceled" [clrAlertClosable]="false" [clrAlertType]="'alert-info'" [clrAlertAppLevel]="true">
+      <div clr-alert-item class="alert-item">
+        <span class="alert-text">
+          Bestelling geannuleerd
+        </span>
+      </div>
+    </clr-alert>
+
+    <div class="qr-code-wrapper" [class.disabled]="orderCanceled">
+      <qr-code [value]="'0x32Be343B94f860124dC4fEe278FDCBD38C102D88'" [size]="250" [backgroundAlpha]="0.0" class="qr"></qr-code>
+      <p>0x32Be343B94f860124dC4fEe278FDCBD38C102D88</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!orderCanceled" type="button" class="btn btn-outline" (click)="cancelOrder()">Annuleer</button>
+    <button *ngIf="orderCanceled" type="button" class="btn btn-outline" (click)="hideModal()">Ga terug</button>
+  </div>
+</clr-modal>
