@@ -21,6 +21,7 @@ import {TransactionComponent} from './transaction/transaction.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { ShopProductComponent } from './shop-product/shop-product.component';
+import {LogoutComponent} from './login/logout.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ShopProductComponent } from './shop-product/shop-product.component';
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
-    ShopProductComponent
+    ShopProductComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
