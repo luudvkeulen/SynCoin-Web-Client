@@ -1,5 +1,44 @@
+<clr-alert *ngIf="loginFailed" [clrAlertType]="'alert-danger'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Verkeerde combinatie van email adres en wachtwoord.
+    </span>
+  </clr-alert-item>
+</clr-alert>
 <div class="content-container">
   <div class="content-area">
-    Login
+    <div class="row flex-items-xs-center">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <h1>Login</h1>
+
+        <div class="form-group">
+          <label for="email" class="required">E-mail adres</label>
+          <label for="email" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [class.invalid]="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
+            <input type="email" id="email" placeholder="naam@domain.com" formControlName="email">
+            <span class="tooltip-content" *ngIf="loginForm.controls['email'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+            <span class="tooltip-content" *ngIf="loginForm.controls['email'].hasError('email')">
+              Geen valide e-mail adres
+            </span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="required">Wachtwoord</label>
+          <label for="password" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
+            [class.invalid]="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+            <input type="password" id="password" placeholder="Wachtwoord" formControlName="password">
+            <span class="tooltip-content" *ngIf="loginForm.controls['password'].hasError('required')">
+              Dit veld is verplicht
+            </span>
+          </label>
+        </div>
+
+        <div class="button-wrapper">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
