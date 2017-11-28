@@ -42,11 +42,9 @@ export class RegisterComponent implements OnInit {
       });
       return;
     }
-    console.log('Submit');
-    console.log(this.registerForm.getRawValue());
     this.accountService.registerUser(this.registerForm.getRawValue()).subscribe(success => {
-      console.log('Success');
-    }, errror => {
+      this.registerForm.reset();
+    }, () => {
       this.formError = 'Er ging iets fout';
     });
   }
