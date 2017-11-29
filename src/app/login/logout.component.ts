@@ -1,7 +1,6 @@
 import {AccountService} from '../account.service';
 import {Router} from '@angular/router';
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component ({
   selector: 'app-login',
@@ -11,30 +10,24 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 
 export class LogoutComponent {
-  loginForm: FormGroup;
-  fb: FormBuilder;
-  constructor(fb: FormBuilder, private accountService: AccountService, private router: Router) {
-    this.fb = fb;
-    this.createForm();
+  private token: String;
+  
+  constructor(router: Router) {
+    router.navigate(['login']);
     this.removeToken();
   }
 
   ngOnInit() {
   }
 
-  createForm() {
-    this.loginForm = this.fb.group({
-      'email': ['', [Validators.required, Validators.email]],
-      'password': ['', [Validators.required]]
-    });
-  }
-
   removeToken() {
-    const token = localStorage.getItem('token');
-    if (token != null) {
-      console.log('Token: ' + token);
+    this.token = localStorage.getItem('token');
+    if (this.token != null) {
+      console.log('Token value: ' + this.token);
       localStorage.removeItem('token');
+      this.token = null;
       console.log('Token removed');
+      console.log('Token value: ' + localStorage.getItem('token'));
     }else {
       console.log('Token does not exist.');
     }
