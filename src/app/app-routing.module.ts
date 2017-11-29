@@ -14,7 +14,6 @@ import {WalletTransactionsComponent} from './wallet-transactions/wallet-transact
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {Product} from './product';
-import {LogoutComponent} from './login/logout.component';
 
 const appRoutes: Routes = [
   {
@@ -88,10 +87,6 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent
   },
   {
     path: '',

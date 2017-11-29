@@ -32,4 +32,16 @@ export class AccountService {
       return res;
     });
   }
+
+  logout(): boolean {
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      localStorage.removeItem('token');
+      console.log('Token removed');
+      return true;
+    }else {
+      console.log('Token does not exist.');
+      return false;
+    }
+  }
 }
