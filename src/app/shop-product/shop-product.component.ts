@@ -9,17 +9,18 @@ import { Observable } from 'rxjs/Rx';
 })
 export class ShopProductComponent implements OnInit {
   @Input() product: Product;
-  showModal: boolean;
+  showModal: boolean = false;
   address: string;
 
+  paymentTimeLimitSeconds: number = 10;
+
   timeLeft: number;
-  countDown: Observable<any>;
+  countDownTimer: Observable<any>;
 
   orderPayed: boolean = false;
   orderCanceled: boolean = false;
   
   constructor() {
-    this.showModal = false;
     this.address = '0x32Be343B94f860124dC4fEe278FDCBD38C102D88';
   }
 
@@ -27,20 +28,24 @@ export class ShopProductComponent implements OnInit {
   }
 
   resetOrder() {
-    this.timeLeft = 60 * 10 - 590;
+    this.timeLeft = this.paymentTimeLimitSeconds;
     this.orderPayed = false;
     this.orderCanceled = false;
   }
 
-  orderProduct(product: Product) {
+  orderProduct() {
+    const doNothing = () => {};
+
     this.showModal = true;
     this.resetOrder();
-    this.countDown = Observable.timer(150, 1000)
+    this.countDownTimer = Observable.timer(150, 1000)
       .take(this.timeLeft)
+      // Stops counting down until one of the three expressions is true.
       .takeWhile(() => this.timeLeft !== 0 || this.orderPayed || this.orderCanceled)
-      .do(() => { }
-      , () => { }
+      .do(doNothing
+      , doNothing
       , () => {
+        // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
         if (this.orderPayed) {
           this.showOrderPayed();
         } else {
@@ -61,6 +66,11 @@ export class ShopProductComponent implements OnInit {
 
   cancelOrder() {
     this.orderCanceled = true;
+  }
+
+  cancelOrderAndExitModal() {
+    this.cancelOrder();
+    this.hideModal();
   }
 
   hideModal() {

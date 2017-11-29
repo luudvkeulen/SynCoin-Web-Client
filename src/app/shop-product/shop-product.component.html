@@ -34,23 +34,25 @@
 </div> -->
 
 <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
-  <h3 class="modal-title">Wachten op betaling van {{product.name}}: {{product.description}} | {{countDown | async}}</h3>
+  <h3 class="modal-title">Wachten op betaling van {{product.name}}: {{product.description}} | {{countDownTimer | async}}</h3>
   <div class="modal-body">
     <clr-alert *ngIf="orderCanceled" [clrAlertClosable]="false" [clrAlertType]="'alert-info'" [clrAlertAppLevel]="true">
       <div clr-alert-item class="alert-item">
         <span class="alert-text">
-          Bestelling geannuleerd
+          Tijdslimiet voor het betalen van de bestelling is verstreken, uw bestelling is geannuleerd.
         </span>
       </div>
     </clr-alert>
 
-    <div class="qr-code-wrapper" [class.disabled]="orderCanceled">
-      <qr-code [value]="'0x32Be343B94f860124dC4fEe278FDCBD38C102D88'" [size]="250" [backgroundAlpha]="0.0" class="qr"></qr-code>
-      <p>0x32Be343B94f860124dC4fEe278FDCBD38C102D88</p>
+    <div class="qr-code-wrapper">
+      <div *ngIf="!orderCanceled">
+        <qr-code [value]="'0x32Be343B94f860124dC4fEe278FDCBD38C102D88'" [size]="250" [backgroundAlpha]="0.0" class="qr"></qr-code>
+        <p>0x32Be343B94f860124dC4fEe278FDCBD38C102D88</p>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!orderCanceled" type="button" class="btn btn-outline" (click)="cancelOrder()">Annuleer</button>
+    <button *ngIf="!orderCanceled" type="button" class="btn btn-outline" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
     <button *ngIf="orderCanceled" type="button" class="btn btn-outline" (click)="hideModal()">Ga terug</button>
   </div>
 </clr-modal>
