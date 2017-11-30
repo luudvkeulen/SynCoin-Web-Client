@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class AccountService {
 
-  url = 'http://localhost:8080/user';
+  url = 'https://syncoin.luudvankeulen.nl/api/user';
 
   constructor(private http: Http) {
   }
@@ -31,5 +31,17 @@ export class AccountService {
       }
       return res;
     });
+  }
+
+  logout(): boolean {
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      localStorage.removeItem('token');
+      console.log('Token removed');
+      return true;
+    }else {
+      console.log('Token does not exist.');
+      return false;
+    }
   }
 }

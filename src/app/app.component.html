@@ -20,6 +20,7 @@
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a routerLink="/register" clrDropdownItem>Registreren</a>
           <a routerLink="/login" clrDropdownItem>Inloggen</a>
+          <a clrDropdownItem (click)="this.logout()">Uitloggen</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
