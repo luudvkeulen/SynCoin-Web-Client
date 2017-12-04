@@ -4,13 +4,18 @@
                 [canvasWidth]="320" [canvasHeight]="320"
                 (onRead)="onQrCodeScanned($event)"
                 *ngIf="!qrCode"></qr-scanner>-->
-    <form class="flex-item-xs-center">
+    <form class="row flex-items-xs-center">
       <section class="form-block">
         <label>Overmaken</label>
         <div class="form-group">
           <label for="walletId">Wallet id</label>
           <input type="text" id="walletId" placeholder="Typ of scan een wallet id" value="{{qrCode}}">
         </div>
+        <div class="form-group">
+          <label for="amount">Bedrag</label>
+          <input type="number" id="amount" placeholder="1.0" value="">
+        </div>
+        <button type="submit" class="btn btn-primary">Overmaken</button>
       </section>
     </form>
   </div>
