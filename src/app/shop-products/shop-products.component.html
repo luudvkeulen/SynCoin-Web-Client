@@ -1,11 +1,10 @@
 <div class="content-container">
   <div class="content-area">
-
-  <div class="row">
-    <div *ngFor="let product of products" class="col-md-4">
-      <app-shop-product [product]="product"></app-shop-product>
+    <div class="row">
+      <div *ngFor="let product of products" class="col-md-4">
+        <app-shop-product [product]="product"></app-shop-product>
+      </div>
     </div>
-  </div>
   </div>
 
   <nav class="sidenav">

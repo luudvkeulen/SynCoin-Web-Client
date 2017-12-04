@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../product';
-import { Observable } from 'rxjs/Rx';
+import {Component, Input, OnInit} from '@angular/core';
+import {Product} from '../product';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-shop-product',
@@ -9,17 +9,17 @@ import { Observable } from 'rxjs/Rx';
 })
 export class ShopProductComponent implements OnInit {
   @Input() product: Product;
-  showModal: boolean = false;
+  showModal = false;
   address: string;
 
-  paymentTimeLimitSeconds: number = 10;
+  paymentTimeLimitSeconds = 10;
 
   timeLeft: number;
   countDownTimer: Observable<any>;
 
-  orderPayed: boolean = false;
-  orderCanceled: boolean = false;
-  
+  orderPayed = false;
+  orderCanceled = false;
+
   constructor() {
     this.address = '0x32Be343B94f860124dC4fEe278FDCBD38C102D88';
   }
@@ -34,7 +34,8 @@ export class ShopProductComponent implements OnInit {
   }
 
   orderProduct() {
-    const doNothing = () => {};
+    const doNothing = () => {
+    };
 
     this.showModal = true;
     this.resetOrder();
@@ -43,17 +44,17 @@ export class ShopProductComponent implements OnInit {
       // Stops counting down until one of the three expressions is true.
       .takeWhile(() => this.timeLeft !== 0 || this.orderPayed || this.orderCanceled)
       .do(doNothing
-      , doNothing
-      , () => {
-        // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
-        if (this.orderPayed) {
-          this.showOrderPayed();
-        } else {
-          this.cancelOrder();
-        }
-      })
+        , doNothing
+        , () => {
+          // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
+          if (this.orderPayed) {
+            this.showOrderPayed();
+          } else {
+            this.cancelOrder();
+          }
+        })
       .map(() => {
-        --this.timeLeft
+        --this.timeLeft;
         const amountOfMinutesLeft = Math.floor((this.timeLeft / 60) % 60).toString();
         const amountOfSecondsLeft = (this.timeLeft % 60).toString();
         return `${amountOfMinutesLeft.length === 1 ? `0${amountOfMinutesLeft}` : amountOfMinutesLeft}:${amountOfSecondsLeft.length === 1 ? `0${amountOfSecondsLeft}` : amountOfSecondsLeft}`;
@@ -61,7 +62,7 @@ export class ShopProductComponent implements OnInit {
   }
 
   showOrderPayed() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   cancelOrder() {

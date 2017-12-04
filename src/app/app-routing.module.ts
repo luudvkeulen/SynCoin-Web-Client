@@ -26,21 +26,7 @@ const appRoutes: Routes = [
     children: [
       {
         path: 'products',
-        component: ShopProductsComponent,
-        children: [
-          {
-            path: 'bier',
-            component: Product
-          },
-          {
-            path: 'vlag',
-            component: Product
-          },
-          {
-            path: 'paraplu',
-            component: Product
-          }
-        ]
+        component: ShopProductsComponent
       },
       {
         path: 'orders',
