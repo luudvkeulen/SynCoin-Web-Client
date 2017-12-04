@@ -16,13 +16,13 @@ import { WalletReceiveComponent } from './wallet-receive/wallet-receive.componen
 import { WalletTransactionsComponent } from './wallet-transactions/wallet-transactions.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { QRCodeModule } from 'angular2-qrcode';
 import { QrScannerModule } from 'angular2-qrscanner/dist';
 import { TransactionComponent } from './transaction/transaction.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ShopProductComponent } from './shop-product/shop-product.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import {QRCodeModule} from 'angular2-qrcode';
 
 @NgModule({
   declarations: [
