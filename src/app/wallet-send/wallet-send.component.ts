@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-wallet-send',
@@ -6,6 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./wallet-send.component.css']
 })
 export class WalletSendComponent implements OnInit {
+  @Input() address: string = 'test';
+  @Input() amount: number = 1.5;
 
   qrCode: String;
 
