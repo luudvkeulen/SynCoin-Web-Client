@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Observable } from 'rxjs/Rx';
+import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-shop-product',
   templateUrl: './shop-product.component.html',
-  styleUrls: ['./shop-product.component.css']
+  styleUrls: ['./shop-product.component.css'],
+  providers: [ ShopService ]
 })
 export class ShopProductComponent implements OnInit {
   @Input() product: Product;
@@ -19,8 +21,8 @@ export class ShopProductComponent implements OnInit {
 
   orderPayed: boolean = false;
   orderCanceled: boolean = false;
-  
-  constructor() {
+
+  constructor(private shopService: ShopService) {
     this.address = '0x32Be343B94f860124dC4fEe278FDCBD38C102D88';
   }
 
@@ -34,7 +36,9 @@ export class ShopProductComponent implements OnInit {
   }
 
   orderProduct() {
-    const doNothing = () => {};
+    const doNothing = () => { };
+
+    this.shopService.createOrder([this.product]).subscribe(result => console.log(result.json()));
 
     this.showModal = true;
     this.resetOrder();
