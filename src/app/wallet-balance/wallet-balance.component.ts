@@ -20,7 +20,8 @@ export class WalletBalanceComponent implements OnInit {
 
   getBalance() {
     this.walletService.getBalance().subscribe(result => {
-      this.balance = result.balance;
+      console.log(result);
+      this.balance = result / 1000000000000000000;
     }, err => {
       console.log(err);
     });
