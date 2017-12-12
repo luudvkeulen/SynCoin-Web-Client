@@ -21,7 +21,6 @@ export class ShopProductComponent implements OnInit {
   timeLeft: number;
   countDownTimer: Observable<any>;
 
-  orderPayed: boolean = false;
   orderCanceled: boolean = false;
 
   constructor(private shopService: ShopService) { }
@@ -30,7 +29,6 @@ export class ShopProductComponent implements OnInit {
 
   resetOrder() {
     this.timeLeft = this.paymentTimeLimitSeconds;
-    this.orderPayed = false;
     this.orderCanceled = false;
   }
 
@@ -47,16 +45,12 @@ export class ShopProductComponent implements OnInit {
         this.countDownTimer = Observable.timer(150, 1000)
           .take(this.timeLeft)
           // Stops counting down until one of the three expressions is true.
-          .takeWhile(() => this.timeLeft !== 0 || this.orderPayed || this.orderCanceled)
+          .takeWhile(() => this.timeLeft !== 0 || this.orderCanceled)
           .do(emptyFunction
           , emptyFunction
           , () => {
             // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
-            if (this.orderPayed) {
-              this.showOrderPayed();
-            } else {
-              this.cancelOrder();
-            }
+            this.cancelOrder();
           })
           .map(() => {
             --this.timeLeft
@@ -65,10 +59,6 @@ export class ShopProductComponent implements OnInit {
             return `${amountOfMinutesLeft.length === 1 ? `0${amountOfMinutesLeft}` : amountOfMinutesLeft}:${amountOfSecondsLeft.length === 1 ? `0${amountOfSecondsLeft}` : amountOfSecondsLeft}`;
           });
       });
-  }
-
-  showOrderPayed() {
-    throw new Error("Method not implemented.");
   }
 
   cancelOrder() {

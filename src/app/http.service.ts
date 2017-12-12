@@ -11,8 +11,11 @@ export class HttpService {
     createHeaders(withAuthorization: boolean): RequestOptions {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         if (withAuthorization) {
-            const token = JSON.parse(localStorage.getItem('token')).token;
-            headers.append('Authorization', `Bearer ${token}`);
+            const authorization = JSON.parse(localStorage.getItem('token'));
+            if (authorization) {
+                const bearerToken = authorization.token;
+                headers.append('Authorization', `Bearer ${bearerToken}`);
+            }
         }
         return new RequestOptions({
             headers
