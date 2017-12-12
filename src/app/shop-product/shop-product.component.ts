@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Observable } from 'rxjs/Rx';
-import { ShopService } from '../shop.service';
-import { Order } from '../order';
+import {ShopService} from '../shop.service';
+import {Order} from '../order';
 
 @Component({
   selector: 'app-shop-product',
@@ -23,9 +23,11 @@ export class ShopProductComponent implements OnInit {
 
   orderCanceled: boolean = false;
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   resetOrder() {
     this.timeLeft = this.paymentTimeLimitSeconds;
@@ -33,7 +35,8 @@ export class ShopProductComponent implements OnInit {
   }
 
   orderProduct() {
-    const emptyFunction = () => { };
+    const emptyFunction = () => {
+    };
 
     this.shopService.createOrder([this.product])
       .subscribe(result => {
@@ -47,11 +50,11 @@ export class ShopProductComponent implements OnInit {
           // Stops counting down until one of the three expressions is true.
           .takeWhile(() => this.timeLeft !== 0 || this.orderCanceled)
           .do(emptyFunction
-          , emptyFunction
-          , () => {
-            // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
-            this.cancelOrder();
-          })
+            , emptyFunction
+            , () => {
+              // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
+              this.cancelOrder();
+            })
           .map(() => {
             --this.timeLeft
             const amountOfMinutesLeft = Math.floor((this.timeLeft / 60) % 60).toString();

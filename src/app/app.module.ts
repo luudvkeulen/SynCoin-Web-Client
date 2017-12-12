@@ -62,4 +62,5 @@ import { ShopService } from './shop.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
