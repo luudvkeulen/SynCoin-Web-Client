@@ -6,8 +6,8 @@
     background-color: grey;
 }
 
-input.hidden {
-    display: none;
+.qr-code-wrapper button {
+    display: block;
 }
 
 button.colorless, button.colorless:hover {

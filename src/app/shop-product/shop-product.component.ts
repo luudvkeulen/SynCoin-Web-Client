@@ -1,67 +1,64 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Observable } from 'rxjs/Rx';
+import { ShopService } from '../shop.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-shop-product',
   templateUrl: './shop-product.component.html',
-  styleUrls: ['./shop-product.component.css']
+  styleUrls: ['./shop-product.component.css'],
+  providers: [ShopService]
 })
 export class ShopProductComponent implements OnInit {
   @Input() product: Product;
+  paymentLink: string;
+  order: Order;
   showModal: boolean = false;
-  address: string;
 
   paymentTimeLimitSeconds: number = 10;
 
   timeLeft: number;
   countDownTimer: Observable<any>;
 
-  orderPayed: boolean = false;
   orderCanceled: boolean = false;
-  
-  constructor() {
-    this.address = '0x32Be343B94f860124dC4fEe278FDCBD38C102D88';
-  }
 
-  ngOnInit() {
-  }
+  constructor(private shopService: ShopService) { }
+
+  ngOnInit() { }
 
   resetOrder() {
     this.timeLeft = this.paymentTimeLimitSeconds;
-    this.orderPayed = false;
     this.orderCanceled = false;
   }
 
   orderProduct() {
-    const doNothing = () => {};
+    const emptyFunction = () => { };
 
-    this.showModal = true;
-    this.resetOrder();
-    this.countDownTimer = Observable.timer(150, 1000)
-      .take(this.timeLeft)
-      // Stops counting down until one of the three expressions is true.
-      .takeWhile(() => this.timeLeft !== 0 || this.orderPayed || this.orderCanceled)
-      .do(doNothing
-      , doNothing
-      , () => {
-        // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
-        if (this.orderPayed) {
-          this.showOrderPayed();
-        } else {
-          this.cancelOrder();
-        }
-      })
-      .map(() => {
-        --this.timeLeft
-        const amountOfMinutesLeft = Math.floor((this.timeLeft / 60) % 60).toString();
-        const amountOfSecondsLeft = (this.timeLeft % 60).toString();
-        return `${amountOfMinutesLeft.length === 1 ? `0${amountOfMinutesLeft}` : amountOfMinutesLeft}:${amountOfSecondsLeft.length === 1 ? `0${amountOfSecondsLeft}` : amountOfSecondsLeft}`;
+    this.shopService.createOrder([this.product])
+      .subscribe(result => {
+        this.order = result.json();
+        this.paymentLink = `${window.location.origin}/wallet/confirm-payment/${this.order.address}/${this.order.amount}/${this.order.data}`;
+
+        this.showModal = true;
+        this.resetOrder();
+        this.countDownTimer = Observable.timer(150, 1000)
+          .take(this.timeLeft)
+          // Stops counting down until one of the three expressions is true.
+          .takeWhile(() => this.timeLeft !== 0 || this.orderCanceled)
+          .do(emptyFunction
+          , emptyFunction
+          , () => {
+            // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
+            this.cancelOrder();
+          })
+          .map(() => {
+            --this.timeLeft
+            const amountOfMinutesLeft = Math.floor((this.timeLeft / 60) % 60).toString();
+            const amountOfSecondsLeft = (this.timeLeft % 60).toString();
+            return `${amountOfMinutesLeft.length === 1 ? `0${amountOfMinutesLeft}` : amountOfMinutesLeft}:${amountOfSecondsLeft.length === 1 ? `0${amountOfSecondsLeft}` : amountOfSecondsLeft}`;
+          });
       });
-  }
-
-  showOrderPayed() {
-    throw new Error("Method not implemented.");
   }
 
   cancelOrder() {
@@ -75,5 +72,9 @@ export class ShopProductComponent implements OnInit {
 
   hideModal() {
     this.showModal = false;
+  }
+
+  openPaymentPage() {
+    window.open(this.paymentLink);
   }
 }

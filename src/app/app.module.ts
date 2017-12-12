@@ -22,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ShopProductComponent } from './shop-product/shop-product.component';
 import { ClipboardModule } from 'ngx-clipboard';
-import {QRCodeModule} from 'angular2-qrcode';
+import { QRCodeModule } from 'angular2-qrcode';
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import {QRCodeModule} from 'angular2-qrcode';
     BrowserAnimationsModule,
     ClipboardModule
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
