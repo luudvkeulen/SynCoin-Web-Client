@@ -11,4 +11,13 @@ export class ShopService {
         return this.httpService.post('shop/order', { products: products.map(product => product.id) }, true);
     }
 
+    confirmTransaction(password: string, address: string, amount: number, data: string) {
+        return this.httpService.post('wallet/tx', {
+            password,
+            address,
+            amount,
+            data
+        }, true);
+    }
+
 }

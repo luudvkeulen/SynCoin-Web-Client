@@ -24,6 +24,7 @@ import { ShopProductComponent } from './shop-product/shop-product.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { QRCodeModule } from 'angular2-qrcode';
 import { HttpService } from './http.service';
+import { ShopService } from './shop.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,10 @@ import { HttpService } from './http.service';
     BrowserAnimationsModule,
     ClipboardModule
   ],
-  providers: [HttpService],
+  providers: [
+    HttpService, 
+    ShopService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

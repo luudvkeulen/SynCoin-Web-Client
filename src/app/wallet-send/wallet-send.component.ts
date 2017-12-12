@@ -1,4 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-wallet-send',
@@ -6,12 +8,18 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./wallet-send.component.css']
 })
 export class WalletSendComponent implements OnInit {
-  @Input() address: string = 'test';
-  @Input() amount: number = 1.5;
+  @Input() address: string = '';
+  @Input() amount: number = 0;
+  data: string = '';
+  password: string = '';
 
-  qrCode: String;
+  showModal: boolean = false;
 
-  constructor() {
+  qrCode: String = '';
+
+  constructor(
+    private route: ActivatedRoute,
+    private shopService: ShopService) {
   }
 
   onQrCodeScanned(event: String): void {
@@ -20,6 +28,27 @@ export class WalletSendComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params) {
+        this.address = params.address;
+        this.amount = params.amount;
+        this.data = params.data;
+      }
+    });
+  }
+
+  promptUserToConfirmTransaction() {
+    this.showModal = true;
+  }
+
+  exitModal() {
+    this.showModal = false;
+  }
+
+  confirmTransaction() {
+    console.log(this.password);
+    this.shopService.confirmTransaction(this.password, this.address, this.amount, this.data)
+      .subscribe(result => console.log(result));
   }
 
 }
