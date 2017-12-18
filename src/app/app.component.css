@@ -1,0 +1,25 @@
+.header{
+  background-color: #FAF9F5;
+  color: #666666;
+}
+
+.nav-text{
+  color: #666666;
+  font-size: 20px;
+  font-family: BastardusSans;
+}
+
+.nav-text:hover{
+  color: #f26739;
+}
+
+.navdivider{
+  background-color: #666666;
+  height: 1px;
+}
+
+@font-face {
+  font-family: BastardusSans;
+  src: url('./../fonts/BastardusSans.ttf');
+  font-weight: bold;
+}

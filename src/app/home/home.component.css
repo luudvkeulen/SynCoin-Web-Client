@@ -9,3 +9,11 @@ h1 {
 .walletCreateContainer button {
   margin: 50px;
 }
+
+.btn{
+  background-color: #f26739;
+}
+
+.btn:hover{
+  background-color: #666666;
+}
