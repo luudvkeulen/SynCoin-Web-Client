@@ -1,54 +1,40 @@
-import {Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-wallet-send',
   templateUrl: './wallet-send.component.html',
-  styleUrls: ['./wallet-send.component.css']
+  styleUrls: ['./wallet-send.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class WalletSendComponent implements OnInit {
-  @Input() address: string = '';
-  @Input() amount: number = 0;
-  data: string = '';
-  password: string = '';
+  address: string = '';
+  amount: number = 0;
 
-  showModal: boolean = false;
+  camOpen: Boolean = false;
 
   qrCode: String = '';
 
   constructor(
-    private route: ActivatedRoute,
     private shopService: ShopService) {
   }
 
   onQrCodeScanned(event: String): void {
     console.log('Scanned ', event);
+    this.camOpen = false;
     this.qrCode = event;
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      if (params) {
-        this.address = params.address;
-        this.amount = params.amount;
-        this.data = params.data;
-      }
-    });
   }
 
-  promptUserToConfirmTransaction() {
-    this.showModal = true;
-  }
-
-  exitModal() {
-    this.showModal = false;
+  isFormValid(){
+    return (/^(0x)?[0-9a-f]{40}$/i.test(this.qrCode+"") && this.amount > 0)
   }
 
   confirmTransaction() {
-    console.log(this.password);
-    this.shopService.confirmTransaction(this.password, this.address, this.amount, this.data)
-      .subscribe(result => console.log(result));
+    //this.shopService.confirmTransaction(this.password, this.address, this.amount, this.data)
+     // .subscribe(result => console.log(result));
   }
-
 }
