@@ -6,3 +6,15 @@ h1 {
   margin-bottom: 1rem;
   text-align: center;
 }
+
+.heading.optional {
+  display: inline-block;
+}
+
+h4 + div.form-group, div.extra-data-wrapper {
+  margin-top: 10px;
+}
+
+.registration-in-progress {
+  max-width: 400px;
+}
