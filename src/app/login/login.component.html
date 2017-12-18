@@ -9,7 +9,7 @@
   <div class="content-area">
     <div class="row flex-items-xs-center">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-        <h1>Login</h1>
+        <h1 class="login">Login</h1>
 
         <div class="form-group">
           <label for="email" class="required">E-mail adres</label>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="button-wrapper">
-          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="submit" class="btn btn-danger login">Login</button>
         </div>
       </form>
     </div>

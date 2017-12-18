@@ -4,14 +4,17 @@
 
 .nav-link{
   color: white;
+  font-family: BastardusSans;
 }
 
 .nav-link:hover{
   text-decoration: none;
+  font-family: BastardusSans;
 }
 
 #product{
   color: white;
+  font-family: BastardusSans;
 }
 
 .orange-plus{
