@@ -1,0 +1,19 @@
+.sidenav{
+  background-color: #666666;
+}
+
+.nav-link{
+  color: white;
+}
+
+.nav-link:hover{
+  text-decoration: none;
+}
+
+#product{
+  color: white;
+}
+
+.orange-plus{
+  color: #f26739;
+}

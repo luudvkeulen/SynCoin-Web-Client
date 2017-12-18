@@ -17,3 +17,12 @@ button.colorless, button.colorless:hover {
 .tooltip-content {
     text-transform: initial;
 }
+
+.btn{
+  background-color: #f26739;
+}
+
+.card-header{
+  background-color: #f26739;
+  color: #ffffff;
+}

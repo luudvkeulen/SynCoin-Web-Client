@@ -1,0 +1,8 @@
+.nav-content{
+  text-decoration: none;
+  color: #666666;
+}
+
+.nav-content:hover{
+  color: #f26739;
+}
