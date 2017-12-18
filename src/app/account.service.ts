@@ -6,12 +6,7 @@ import { HttpService } from './http.service';
 @Injectable()
 export class AccountService {
 
-  url = 'https://syncoin.luudvankeulen.nl/api/user';
-
-  // url = 'http://localhost:8080/user'
-
   constructor(
-    private http: Http,
     private httpService: HttpService) {
   }
 
@@ -39,5 +34,13 @@ export class AccountService {
       console.log('Token does not exist.');
       return false;
     }
+  }
+
+  getData(): Observable<any> {
+    return this.httpService.get('user', true).map(result => console.log(result));
+  }
+
+  updateData(accountData: any): Observable<any> {
+    throw new Error("Method not implemented.");
   }
 }

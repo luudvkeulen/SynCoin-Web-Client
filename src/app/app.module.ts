@@ -25,6 +25,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { QRCodeModule } from 'angular2-qrcode';
 import { HttpService } from './http.service';
 import { ShopService } from './shop.service';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ShopService } from './shop.service';
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
-    ShopProductComponent
+    ShopProductComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

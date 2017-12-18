@@ -13,6 +13,7 @@ import {WalletReceiveComponent} from './wallet-receive/wallet-receive.component'
 import {WalletTransactionsComponent} from './wallet-transactions/wallet-transactions.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
+import { AccountComponent } from './account/account.component';
 
 const appRoutes: Routes = [
   {
@@ -68,6 +69,10 @@ const appRoutes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'account',
+    component: AccountComponent
   },
   {
     path: 'register',

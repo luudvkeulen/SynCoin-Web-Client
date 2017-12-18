@@ -18,6 +18,7 @@
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a routerLink="/account" clrDropdownItem>Mijn account</a>
           <a routerLink="/register" clrDropdownItem>Registreren</a>
           <a routerLink="/login" clrDropdownItem>Inloggen</a>
           <a clrDropdownItem (click)="this.logout()">Uitloggen</a>
