@@ -18,6 +18,10 @@
   height: 1px;
 }
 
+.nav-link{
+  font-family: BastardusSans;
+}
+
 @font-face {
   font-family: BastardusSans;
   src: url('./../fonts/BastardusSans.ttf');

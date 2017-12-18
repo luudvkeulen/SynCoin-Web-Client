@@ -2,9 +2,9 @@
   <div class="content-area">
     <div class="row flex-items-xs-center">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" novalidate>
-        <h1>Maak uw account aan</h1>
+        <h1 class="form-text">Maak uw account aan</h1>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="email" class="required">E-mail adres</label>
           <label for="email" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-md"
@@ -19,7 +19,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="name" class="required">Voornaam</label>
           <label for="name" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-md"
@@ -31,7 +31,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="lastname" class="required">Achternaam</label>
           <label for="lastname" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-md"
@@ -43,7 +43,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="phone" class="required">Telefoon</label>
           <label for="phone" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-md"
@@ -55,7 +55,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="company" class="required">Bedrijf</label>
           <label for="company" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-md"
@@ -67,7 +67,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="address" class="required">Bedrijfsadres</label>
           <label for="address" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-md"
@@ -79,7 +79,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="password" class="required">Wachtwoord</label>
           <label for="password" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
@@ -91,7 +91,7 @@
           </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-text">
           <label for="passwordvalidation" class="required">Wachtwoord herhaling</label>
           <label for="passwordvalidation" aria-haspopup="true" role="tooltip"
                  class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
@@ -116,7 +116,7 @@
         </div>
 
         <div class="button-wrapper">
-          <button type="submit" class="btn btn-primary">Registreren</button>
+          <button type="submit" class="btn btn-danger form-text">Registreren</button>
         </div>
       </form>
     </div>
