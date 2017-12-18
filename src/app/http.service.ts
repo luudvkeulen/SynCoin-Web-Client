@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers} from '@angular/http';
+import {isDevMode} from '@angular/core';
 
 @Injectable()
 export class HttpService {
-  // private url: string = 'https://syncoin.luudvankeulen.nl/api/';
-  private url: string = 'http://localhost:8080/';
+  private url: string = 'https://syncoin.syntouch.nl/api/';
 
   constructor(private http: Http) {
+    if (isDevMode()) {
+      this.url = 'http://localhost:8080/';
+    }
   }
 
   createHeaders(withAuthorization: boolean): RequestOptions {
@@ -28,6 +31,6 @@ export class HttpService {
   }
 
   get(endPoint: string, useAuthorization: boolean) {
-    return this.http.get(endPoint, this.createHeaders(useAuthorization));
+    return this.http.get(`${this.url}${endPoint}`, this.createHeaders(useAuthorization));
   }
 }

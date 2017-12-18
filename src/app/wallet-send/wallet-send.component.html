@@ -16,9 +16,30 @@
           <input type="number" id="bedrag" placeholder="Voer een bedrag in" value="{{amount}}">
         </div>
         <div class="form-group">
-          <button class="btn btn-primary">Bevestig betaling</button>
+          <button (click)="promptUserToConfirmTransaction()" class="btn btn-primary">Bevestig betaling</button>
         </div>
       </section>
     </form>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Bevestig transactie</h3>
+  <div class="modal-body">
+    <form>
+      <section class="form-block">
+        <div class="form-group">
+          <p>Voer uw wachtwoord in om de transactie te bevestigen.</p>
+        </div>
+        <div class="form-group">
+          <label for="password">Wachtwoord:</label>
+          <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" id="password" />
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="exitModal()">Annuleer bestelling</button>
+    <button type="button" class="btn btn-primary" (click)="confirmTransaction()">Bevestig transactie</button>
+  </div>
+</clr-modal>
