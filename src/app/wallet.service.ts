@@ -17,4 +17,13 @@ export class WalletService {
       .map(result => result.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  
+  getWalletAddress(): Observable<any> {
+    return this
+      .httpService
+      .get(this.url + '/address', true)
+      .map(result => result.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
