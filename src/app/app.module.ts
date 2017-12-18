@@ -26,6 +26,8 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { HttpService } from './http.service';
 import { ShopService } from './shop.service';
 import {AdminComponent} from './admin/admin.component';
+import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
+import {AdminOrderComponent} from './admin-order/admin-order.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import {AdminComponent} from './admin/admin.component';
     RegisterComponent,
     TransactionComponent,
     ShopProductComponent,
-    AdminComponent
+    AdminComponent,
+    AdminOrdersComponent,
+    AdminOrderComponent
   ],
   imports: [
     BrowserModule,
