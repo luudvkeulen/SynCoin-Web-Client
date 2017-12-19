@@ -1,4 +1,9 @@
 table tr:hover {
-  background-color: #49AFD9;
+  background-color: #f26739;
   cursor: pointer;
+}
+
+tbody{
+  background-color: #666666;
+  color: #ffffff;
 }
