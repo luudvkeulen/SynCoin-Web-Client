@@ -26,11 +26,13 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { HttpService } from './http.service';
 import { ShopService } from './shop.service';
 import { AccountComponent } from './account/account.component';
-import {AdminComponent} from './admin/admin.component';
-import {OrdersComponent} from './orders/orders.component';
-import {AdminOrderComponent} from './admin-order/admin-order.component';
-import {UserOrdersComponent} from './user-orders/user-orders.component';
-import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
+import { AdminComponent } from './admin/admin.component';
+import { OrdersComponent } from './orders/orders.component';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { LoginGuard } from './login.guard';
+import { AccountService } from './account.service';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
   ],
   providers: [
     HttpService,
-    ShopService
+    ShopService,
+    AccountService,
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })
