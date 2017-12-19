@@ -19,5 +19,4 @@ export class AdminOrdersComponent implements OnInit {
       console.log(err);
     });
   }
-
 }
