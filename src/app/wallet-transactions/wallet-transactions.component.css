@@ -10,7 +10,7 @@ tbody{
 
 td {
   text-align: right;
-  max-width: 200px;
-  min-width: 100px;
+  max-width: 50px;
+  min-width: 10px;
   word-wrap: break-word;
 }

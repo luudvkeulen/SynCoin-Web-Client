@@ -7,3 +7,10 @@ tbody{
   background-color: #666666;
   color: #ffffff;
 }
+
+td {
+  text-align: right;
+  max-width: 50px;
+  min-width: 10px;
+  word-wrap: break-word;
+}

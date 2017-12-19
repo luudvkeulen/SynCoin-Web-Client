@@ -3,7 +3,10 @@ h1 {
 }
 
 .walletCreateContainer {
-  text-align: center;
+  text-align: center;  }
+
+.content-container{
+  background-color: #FAF9F5;
 }
 
 .walletCreateContainer button {
