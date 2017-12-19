@@ -29,6 +29,8 @@ import { AccountComponent } from './account/account.component';
 import {AdminComponent} from './admin/admin.component';
 import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
 import {AdminOrderComponent} from './admin-order/admin-order.component';
+import { LoginGuard } from './login.guard';
+import { AccountService } from './account.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import {AdminOrderComponent} from './admin-order/admin-order.component';
   ],
   providers: [
     HttpService,
-    ShopService
+    ShopService,
+    AccountService,
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })
