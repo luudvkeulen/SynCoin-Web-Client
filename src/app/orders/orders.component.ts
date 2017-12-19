@@ -1,26 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {ShopService} from '../shop.service';
+import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 
 @Component({
-  selector: 'app-admin-orders',
+  selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css'],
-  providers: [ShopService]
+  styleUrls: ['./orders.component.css']
 })
-export class AdminOrdersComponent implements OnInit {
-
-  orders = [];
+export class OrdersComponent implements OnInit, OnChanges {
+  @Input() orders;
+  _orders;
   loading = true;
 
-  constructor(private shopService: ShopService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.shopService.getAllOrders().subscribe(result => {
-      this.orders = result;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const orders: SimpleChange = changes.orders;
+    if (orders.currentValue != null) {
+      this._orders = orders.currentValue;
       this.loading = false;
-    }, err => {
-      console.log(err);
-    });
+    }
   }
 }

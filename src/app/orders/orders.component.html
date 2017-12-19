@@ -1,6 +1,6 @@
 <div class="content-container">
   <div class="content-area">
-    <table class="table" *ngIf="!loading">
+    <table class="table" *ngIf="!loading && _orders.length > 0">
       <thead>
       <tr>
         <th>ID</th>
@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let order of orders.reverse()" [routerLink]="['/admin/order/', order._id]">
+      <tr *ngFor="let order of _orders.reverse()" [routerLink]="['/admin/order/', order._id]">
         <td>{{order._id}}</td>
         <td>{{order.created | date: 'dd/MM/yyyy HH:mm'}}</td>
         <td>{{order.user.surname}} {{order.user.lastname}}</td>
