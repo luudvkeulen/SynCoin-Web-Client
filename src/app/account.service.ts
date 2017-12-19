@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import { HttpService } from './http.service';
+import { User } from './user';
 
 @Injectable()
 export class AccountService {
@@ -36,11 +37,14 @@ export class AccountService {
     }
   }
 
-  getData(): Observable<any> {
-    return this.httpService.get('user', true).map(result => console.log(result));
+  getData(): Observable<User> {
+    return this.httpService.get('user', true).map(result => result.json());
   }
 
-  updateData(accountData: any): Observable<any> {
-    throw new Error("Method not implemented.");
+  updateData(id: string, accountData: User): Observable<any> {
+    return this.httpService.post('user/update', {
+      ...accountData,
+      id
+    }, true);
   }
 }

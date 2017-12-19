@@ -6,10 +6,10 @@
   display: inline-block;
 }
   
-h4 + div.form-group, div.extra-data-wrapper {
+h1 + div.form-group, div.extra-data-wrapper {
   margin-top: 10px;
 }
 
-.registration-in-progress {
-  max-width: 400px;
+.button-wrapper {
+  margin-top: 15px;
 }

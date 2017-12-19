@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   showExtra: boolean;
   registeringAccount: boolean;
 
-  constructor(fb: FormBuilder, private accountService: AccountService) {
+constructor(fb: FormBuilder, private accountService: AccountService) {
     this.fb = fb;
     this.createForm();
     this.showExtra = false;
@@ -28,7 +28,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'password': ['', [Validators.required, Validators.minLength(8)]],
-      'passwordvalidation': ['', [Validators.required, CustomValidators.matchPassword]]
+      'passwordvalidation': ['', [Validators.required, CustomValidators.matchPassword]],
+      'name': [''],
+      'lastname': [''],
+      'phone': [''],
+      'company': [''],
+      'address': ['']
     });
   }
 
