@@ -9,15 +9,18 @@ import {ShopService} from '../shop.service';
 })
 export class AdminOrdersComponent implements OnInit {
 
+  orders = [];
+  loading = true;
+
   constructor(private shopService: ShopService) {
   }
 
   ngOnInit() {
     this.shopService.getAllOrders().subscribe(result => {
-      console.log(result);
+      this.orders = result;
+      this.loading = false;
     }, err => {
       console.log(err);
     });
   }
-
 }

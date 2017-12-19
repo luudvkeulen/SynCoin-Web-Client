@@ -1,9 +1,10 @@
 <div class="content-container">
   <div class="content-area">
-    <table class="table">
+    <table class="table" *ngIf="!loading">
       <thead>
       <tr>
         <th>ID</th>
+        <th>Datum</th>
         <th>Besteller</th>
         <th>Product</th>
         <th>Aantal</th>
@@ -11,28 +12,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr [routerLink]="['/admin/order/', 1]">
-        <td>#1</td>
-        <td>Peter de Vries</td>
-        <td>SynTouch Blond</td>
+      <tr *ngFor="let order of orders.reverse()" [routerLink]="['/admin/order/', order._id]">
+        <td>{{order._id}}</td>
+        <td>{{order.created | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>{{order.user.surname}} {{order.user.lastname}}</td>
+        <td>{{order.products[0].name}}</td>
         <td>1</td>
-        <td>Betaald</td>
-      </tr>
-      <tr>
-        <td>#2</td>
-        <td>Jan de Groot</td>
-        <td>SynTouch Bruin</td>
-        <td>1</td>
-        <td>Nog niet betaald</td>
-      </tr>
-      <tr>
-        <td>#3</td>
-        <td>Henrik van Leeuwen</td>
-        <td>SynTouch Blond</td>
-        <td>1</td>
-        <td>Afgeleverd</td>
+        <td>{{order.status}}</td>
       </tr>
       </tbody>
     </table>
+    <div class="row">
+      <span class="spinner" *ngIf="loading">
+        Loading...
+      </span>
+    </div>
   </div>
 </div>
