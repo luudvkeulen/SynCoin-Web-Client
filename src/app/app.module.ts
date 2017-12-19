@@ -25,6 +25,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { QRCodeModule } from 'angular2-qrcode';
 import { HttpService } from './http.service';
 import { ShopService } from './shop.service';
+import { AccountComponent } from './account/account.component';
 import {AdminComponent} from './admin/admin.component';
 import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
 import {AdminOrderComponent} from './admin-order/admin-order.component';
@@ -46,6 +47,7 @@ import {AdminOrderComponent} from './admin-order/admin-order.component';
     RegisterComponent,
     TransactionComponent,
     ShopProductComponent,
+    AccountComponent,
     AdminComponent,
     AdminOrdersComponent,
     AdminOrderComponent

@@ -1,29 +1,46 @@
+<clr-alert [clrAlertType]="'alert-success'" [(clrAlertClosed)]="!updateSucceeded" [clrAlertAppLevel]="true">
+  <div class="alert-item">
+    <span class="alert-text">
+      Account informatie geüpdatet!
+    </span>
+  </div>
+</clr-alert>
+
+<clr-alert [clrAlertType]="'alert-danger'" [(clrAlertClosed)]="!updateFailed" [clrAlertAppLevel]="true">
+  <div class="alert-item">
+    <span class="alert-text">
+      Het updaten van uw account informatie is niet gelukt!
+    </span>
+  </div>
+</clr-alert>
+
 <div class="content-container">
   <div class="content-area">
     <div class="row flex-items-xs-center">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" novalidate>
-        <h1>Maak uw account aan</h1>
+      <form [formGroup]="accountForm" (ngSubmit)="onSubmit(accountForm.value)" disabled="true" novalidate>
+        <h1>Wijzig account gegevens</h1>
 
         <div class="form-group">
           <label for="email" class="required">E-mail adres</label>
-          <label for="email" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [class.invalid]="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
-            <input type="email" id="email" placeholder="naam@domain.com" formControlName="email">
-            <span class="tooltip-content" *ngIf="registerForm.controls['email'].hasError('required')">
+          <label for="email" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [class.invalid]="!accountForm.controls['email'].valid && accountForm.controls['email'].touched">
+            <input [ngModel]="user.email" type="email" id="email" placeholder="naam@domain.com" formControlName="email">
+            <span class="tooltip-content" *ngIf="accountForm.controls['email'].hasError('required')">
               Dit veld is verplicht
             </span>
-            <span class="tooltip-content" *ngIf="registerForm.controls['email'].hasError('email')">
+            <span class="tooltip-content" *ngIf="accountForm.controls['email'].hasError('email')">
               Geen valide e-mail adres
             </span>
           </label>
         </div>
 
-        <div class="form-group">
+        <!-- Not possible for now  -->
+        <!-- <div class="form-group">
           <label for="password" class="required">Wachtwoord</label>
           <label for="password" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
-            [class.invalid]="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">
+            [class.invalid]="!accountForm.controls['password'].valid && accountForm.controls['password'].touched">
             <input type="password" id="password" placeholder="Wachtwoord" formControlName="password">
-            <span class="tooltip-content" *ngIf="registerForm.controls['password'].hasError('minlength')">
-              Password moet ten minste {{registerForm.controls['password'].getError('minlength')['requiredLength']}} karakters lang zijn
+            <span class="tooltip-content" *ngIf="accountForm.controls['password'].hasError('minlength')">
+              Password moet ten minste {{accountForm.controls['password'].getError('minlength')['requiredLength']}} karakters lang zijn
             </span>
           </label>
         </div>
@@ -31,13 +48,13 @@
         <div class="form-group">
           <label for="passwordvalidation" class="required">Wachtwoord herhaling</label>
           <label for="passwordvalidation" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-lg tooltip-bottom-left"
-            [class.invalid]="!registerForm.controls['passwordvalidation'].valid && registerForm.controls['passwordvalidation'].touched">
+            [class.invalid]="!accountForm.controls['passwordvalidation'].valid && accountForm.controls['passwordvalidation'].touched">
             <input type="password" id="passwordvalidation" placeholder="Herhaal wachtwoord" formControlName="passwordvalidation">
-            <span class="tooltip-content" *ngIf="registerForm.controls['passwordvalidation'].hasError('matchpassword')">
+            <span class="tooltip-content" *ngIf="accountForm.controls['passwordvalidation'].hasError('matchpassword')">
               Wachtwoorden komen niet overeen
             </span>
           </label>
-        </div>
+        </div> -->
 
         <h4 class="heading optional">Optionele informatie</h4>
         <clr-icon *ngIf="!showExtra" (click)="showExtra = !showExtra" shape="caret" dir="down"></clr-icon>
@@ -47,35 +64,35 @@
           <div class="form-group">
             <label for="name">Voornaam</label>
             <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md">
-              <input type="text" id="name" placeholder="Voornaam" formControlName="name">
+              <input [ngModel]="user.name" type="text" id="name" placeholder="Voornaam" formControlName="name">
             </label>
           </div>
 
           <div class="form-group">
             <label for="lastname">Achternaam</label>
             <label for="lastname" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md">
-              <input type="text" id="lastname" placeholder="Achternaam" formControlName="lastname">
+              <input [ngModel]="user.lastname" type="text" id="lastname" placeholder="Achternaam" formControlName="lastname">
             </label>
           </div>
 
           <div class="form-group">
             <label for="phone">Telefoon</label>
             <label for="phone" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md">
-              <input type="text" id="phone" placeholder="0612345678" formControlName="phone">
+              <input [ngModel]="user.phone" type="text" id="phone" placeholder="0612345678" formControlName="phone">
             </label>
           </div>
 
           <div class="form-group">
             <label for="company">Bedrijf</label>
             <label for="company" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md">
-              <input type="text" id="company" placeholder="Bedrijfsnaam" formControlName="company">
+              <input [ngModel]="user.company" type="text" id="company" placeholder="Bedrijfsnaam" formControlName="company">
             </label>
           </div>
 
           <div class="form-group">
             <label for="address">Bedrijfsadres</label>
             <label for="address" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md">
-              <input type="text" id="address" placeholder="Adres" formControlName="address">
+              <input [ngModel]="user.address" type="text" id="address" placeholder="Adres" formControlName="address">
             </label>
           </div>
         </div>
@@ -91,16 +108,8 @@
           </div>
         </div>
 
-        <clr-alert *ngIf="registeringAccount" [clrAlertClosable]="false">
-          <div class="alert-item registration-in-progress">
-            <span class="alert-text">
-              Het registreren van een account kan tot 30 seconden duren, even geduld alstublieft.
-            </span>
-          </div>
-        </clr-alert>
-
         <div class="button-wrapper">
-          <button [clrLoading]="registeringAccount" type="submit" class="btn btn-primary-outline">Registreren</button>
+          <button [clrLoading]="" type="submit" class="btn btn-primary-outline">Update account informatie</button>
         </div>
       </form>
     </div>
