@@ -13,6 +13,9 @@ import {WalletReceiveComponent} from './wallet-receive/wallet-receive.component'
 import {WalletTransactionsComponent} from './wallet-transactions/wallet-transactions.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
+import {AdminComponent} from './admin/admin.component';
+import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
+import {AdminOrderComponent} from './admin-order/admin-order.component';
 
 const appRoutes: Routes = [
   {
@@ -76,6 +79,25 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'orders',
+        component: AdminOrdersComponent
+      },
+      {
+        path: 'order/:id',
+        component: AdminOrderComponent
+      },
+      {
+        path: '',
+        redirectTo: 'orders',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '',

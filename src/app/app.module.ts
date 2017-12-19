@@ -25,6 +25,9 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { QRCodeModule } from 'angular2-qrcode';
 import { HttpService } from './http.service';
 import { ShopService } from './shop.service';
+import {AdminComponent} from './admin/admin.component';
+import {AdminOrdersComponent} from './admin-orders/admin-orders.component';
+import {AdminOrderComponent} from './admin-order/admin-order.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { ShopService } from './shop.service';
     LoginComponent,
     RegisterComponent,
     TransactionComponent,
-    ShopProductComponent
+    ShopProductComponent,
+    AdminComponent,
+    AdminOrdersComponent,
+    AdminOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,7 @@ import { ShopService } from './shop.service';
     ClipboardModule
   ],
   providers: [
-    HttpService, 
+    HttpService,
     ShopService
   ],
   bootstrap: [AppComponent]
