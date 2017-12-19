@@ -1,0 +1,12 @@
+.form-text{
+  font-family: BastardusSans;
+}
+
+.btn-danger:hover{
+  background-color: #666666;
+}
+
+.input-field{
+  text-decoration: none;
+  color: #f26739;
+}
