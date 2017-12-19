@@ -3,8 +3,8 @@ import {ShopService} from '../shop.service';
 
 @Component({
   selector: 'app-admin-orders',
-  templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.css'],
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.css'],
   providers: [ShopService]
 })
 export class AdminOrdersComponent implements OnInit {
