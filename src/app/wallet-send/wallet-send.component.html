@@ -1,7 +1,21 @@
+<clr-alert *ngIf="txFailed" [clrAlertType]="'alert-danger'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Er ging iets fout met verzenden, controlleer je balans of probeer het opnieuw.
+    </span>
+  </clr-alert-item>
+</clr-alert>
+
+<clr-alert *ngIf="txSuccess" [clrAlertType]="'alert-success'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Verzonden!
+    </span>
+  </clr-alert-item>
+</clr-alert>
+
 <div class="content-container">
   <div class="content-area">
-
-
 
     <form>
       <section class="form-block">
@@ -47,6 +61,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="showModal = false">Annuleer bestelling</button>
-    <button type="button" class="btn btn-primary" (click)="confirmTransaction()">Bevestig transactie</button>
+    <button type="button" class="btn btn-primary" (click)="sendTransaction(password)">Bevestig transactie</button>
   </div>
 </clr-modal>

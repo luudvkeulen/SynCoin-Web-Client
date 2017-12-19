@@ -28,6 +28,6 @@ export class HttpService {
   }
 
   get(endPoint: string, useAuthorization: boolean) {
-    return this.http.get(endPoint, this.createHeaders(useAuthorization));
+    return this.http.get(`${this.url}${endPoint}`, this.createHeaders(useAuthorization));
   }
 }

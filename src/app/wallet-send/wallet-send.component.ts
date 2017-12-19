@@ -1,23 +1,28 @@
 import {Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ShopService } from '../shop.service';
+import { WalletService } from '../wallet.service';
 
 @Component({
   selector: 'app-wallet-send',
   templateUrl: './wallet-send.component.html',
   styleUrls: ['./wallet-send.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [WalletService]
 })
 export class WalletSendComponent implements OnInit {
-  address: string = '';
   amount: number = 0;
+  qrCode: String = '';
 
   camOpen: Boolean = false;
 
-  qrCode: String = '';
+  txFailed: Boolean = false;
+  txSuccess: Boolean = false;
+
+  showModal: Boolean = false;
+
 
   constructor(
-    private shopService: ShopService) {
+    private walletService: WalletService) {
   }
 
   onQrCodeScanned(event: String): void {
@@ -33,8 +38,15 @@ export class WalletSendComponent implements OnInit {
     return (/^(0x)?[0-9a-f]{40}$/i.test(this.qrCode+"") && this.amount > 0)
   }
 
-  confirmTransaction() {
-    //this.shopService.confirmTransaction(this.password, this.address, this.amount, this.data)
-     // .subscribe(result => console.log(result));
+  sendTransaction(password){
+    this.walletService.sendTransaction(password, this.qrCode, this.amount, false).subscribe(result => {
+      this.showModal = false;
+      this.txSuccess = true;
+      this.txFailed = false;
+    }, err => {
+      this.showModal = false;
+      this.txFailed = true;
+      this.txSuccess = false;
+    });
   }
 }
