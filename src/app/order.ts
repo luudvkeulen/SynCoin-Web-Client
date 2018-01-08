@@ -38,4 +38,8 @@ export class Order {
   public canReceive(): boolean {
     return this.isDelivering() && !this.isCanceled() && !this.isReceived();
   }
+
+  public canCancel(): boolean {
+    return this.isFunded();
+  }
 }

@@ -47,4 +47,10 @@ export class AdminOrderComponent implements OnInit, OnDestroy {
       window.location.assign(`${window.location.origin}/wallet/confirm-payment/${request.address}/${request.amount}/${request.data}`);
     });
   }
+
+  cancel() {
+    this.shopService.cancel(this.order.id).subscribe((request) => {
+      window.location.assign(`${window.location.origin}/wallet/confirm-payment/${request.address}/${request.amount}/${request.data}`);
+    });
+  }
 }

@@ -10,9 +10,11 @@
     <button class="btn btn-primary" (click)="confirmDelivering()">Bevestig verzending</button>
   </div>
 
-  <button class="btn btn-primary" (click)="confirmDelivering()">Bevestig verzending</button>
-
   <div *ngIf="order && user && order.user.id == user.id && order.canReceive()">
     <button class="btn btn-primary" (click)="confirmReceived()">Bevestig ontvangst</button>
+  </div>
+
+  <div *ngIf="order && user && order.user.id == user.id && order.canCancel()">
+    <button class="btn btn-primary" (click)="cancel()">Annuleer bestelling</button>
   </div>
 </div>
