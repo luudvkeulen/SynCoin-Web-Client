@@ -6,4 +6,5 @@ export class User {
     phone: string;
     company: string;
     address: string;
+    isAdmin: boolean;
 }
