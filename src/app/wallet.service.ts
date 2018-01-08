@@ -27,7 +27,7 @@ export class WalletService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  sendTransaction(password: String, address: String, amount: Number, data: Boolean): Observable<any> {
+  sendTransaction(password: String, address: String, amount: Number, data: any): Observable<any> {
     return this
       .httpService
       .post('wallet/tx', {

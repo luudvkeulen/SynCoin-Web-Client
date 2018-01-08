@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { WalletService } from '../wallet.service';
+import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-wallet-send',
@@ -11,7 +12,8 @@ import { WalletService } from '../wallet.service';
 })
 export class WalletSendComponent implements OnInit {
   amount: number = 0;
-  qrCode: String = '';
+  qrCode: string = '';
+  data: any = false;
 
   camOpen: Boolean = false;
 
@@ -22,24 +24,34 @@ export class WalletSendComponent implements OnInit {
 
 
   constructor(
-    private walletService: WalletService) {
+    private walletService: WalletService,
+    private shopService: ShopService,
+    private route: ActivatedRoute) {
   }
 
-  onQrCodeScanned(event: String): void {
+  onQrCodeScanned(event: string): void {
     console.log('Scanned ', event);
     this.camOpen = false;
     this.qrCode = event;
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params) {
+        this.qrCode = params.address;
+        this.amount = params.amount;
+        this.data = params.data;
+      }
+    });
   }
 
-  isFormValid(){
-    return (/^(0x)?[0-9a-f]{40}$/i.test(this.qrCode+"") && this.amount > 0)
+  isFormValid() {
+    return (/^(0x)?[0-9a-f]{40}$/i.test(this.qrCode + "") && this.amount > 0)
   }
 
-  sendTransaction(password){
-    this.walletService.sendTransaction(password, this.qrCode, this.amount, false).subscribe(result => {
+  sendTransaction(password) {
+    console.log(this.data);
+    this.walletService.sendTransaction(password, this.qrCode, this.amount, this.data).subscribe(result => {
       this.showModal = false;
       this.txSuccess = true;
       this.txFailed = false;
