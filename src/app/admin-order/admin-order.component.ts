@@ -37,14 +37,14 @@ export class AdminOrderComponent implements OnInit, OnDestroy {
   }
 
   confirmDelivering() {
-    this.shopService.confirmDelivering(this.order.id).subscribe(console.log);
-
-    // TODO: Redirect to wallet with request
+    this.shopService.confirmDelivering(this.order.id).subscribe((request) => {
+      window.location.assign(`${window.location.origin}/wallet/confirm-payment/${request.address}/${request.amount}/${request.data}`);
+    });
   }
 
   confirmReceived() {
-    this.shopService.confirmReceived(this.order.id).subscribe(console.log);
-
-    // TODO: Redirect to wallet with request
+    this.shopService.confirmReceived(this.order.id).subscribe((request) => {
+      window.location.assign(`${window.location.origin}/wallet/confirm-payment/${request.address}/${request.amount}/${request.data}`);
+    });
   }
 }
