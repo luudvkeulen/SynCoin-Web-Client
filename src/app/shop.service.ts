@@ -29,4 +29,12 @@ export class ShopService {
       .map(result => result.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  getUserOrders(): Observable<any> {
+    return this
+      .httpService
+      .get('shop/userorders', true)
+      .map(result => result.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
