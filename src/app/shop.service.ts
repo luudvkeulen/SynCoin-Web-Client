@@ -50,4 +50,10 @@ export class ShopService {
       .post('shop/confirm-received', {reference: reference}, true)
       .map(result => result.json());
   }
+
+  cancel(reference: string) {
+    return this.httpService
+      .post('shop/cancel', {reference: reference}, true)
+      .map(result => result.json());
+  }
 }
