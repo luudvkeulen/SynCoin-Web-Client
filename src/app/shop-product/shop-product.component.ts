@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Observable } from 'rxjs/Rx';
 import {ShopService} from '../shop.service';
-import {Order} from '../order';
+import {OrderRequest} from '../order-request';
 
 @Component({
   selector: 'app-shop-product',
@@ -13,7 +13,7 @@ import {Order} from '../order';
 export class ShopProductComponent implements OnInit {
   @Input() product: Product;
   paymentLink: string;
-  order: Order;
+  order: OrderRequest;
   showModal: boolean = false;
 
   paymentTimeLimitSeconds: number = 10;
