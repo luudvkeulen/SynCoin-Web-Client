@@ -1,0 +1,9 @@
+.balans{
+  color: #666666;
+  font-family: BastardusSans;
+}
+
+.balans:hover{
+  color: #f26739;
+  font-family: BastardusSans;
+}

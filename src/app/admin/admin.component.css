@@ -1,0 +1,10 @@
+.nav-content{
+  text-decoration: none;
+  color: #666666;
+  font-family: BastardusSans;
+}
+
+.nav-content:hover{
+  text-decoration: none;
+  color: #f26739;
+}

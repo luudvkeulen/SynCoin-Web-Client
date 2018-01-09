@@ -1,22 +1,29 @@
 <clr-main-container class="main-container">
-  <clr-header class="header-1 header">
+  <br>
+  <clr-header class="header header">
     <div class="branding">
       <a routerLink="/home" class="nav-link">
-        <!--<clr-icon shape="vm-bug"></clr-icon>-->
-        <span class="title">SynCoin</span>
+        <div class="header-spacer"></div>
+        <!--test-->
       </a>
     </div>
-    <div class="header-nav" [clr-nav-level]="1">
+
+    <div class="header-nav offset-md-2" [clr-nav-level]="1">
+      <span class="logo-and-title">
+        <span><img class="image-header" src="../assets/syntouch_logo.png" height="75px"></span>
+      </span>
+      <a routerLink="home" routerLinkActive="active" class="nav-link"><span class="nav-text">SynCoin</span></a>
       <a routerLink="home" routerLinkActive="active" class="nav-link"><span class="nav-text">Home</span></a>
       <a routerLink="shop" routerLinkActive="active" class="nav-link"><span class="nav-text">Winkel</span></a>
       <a routerLink="wallet" routerLinkActive="active" class="nav-link"><span class="nav-text">Wallet</span></a>
     </div>
+
     <div class="header-actions">
+      <div class="nav-link">
       <clr-dropdown>
-        <button class="nav-icon" clrDropdownTrigger>
-          <clr-icon shape="user"></clr-icon>
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
+          <button class="nav-icon" clrDropdownTrigger>
+            <clr-icon shape="user"></clr-icon>
+          </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a *ngIf="accountService.isUserLoggedIn()" routerLink="/account" clrDropdownItem>Mijn account</a>
           <a *ngIf="!accountService.isUserLoggedIn()" routerLink="/register" clrDropdownItem>Registreren</a>
@@ -24,8 +31,11 @@
           <a *ngIf="accountService.isUserLoggedIn()" clrDropdownItem (click)="this.logout()">Uitloggen</a>
         </clr-dropdown-menu>
       </clr-dropdown>
+      </div>
     </div>
   </clr-header>
+  <br>
+  <div class="navdivider"><p></p></div>
   <router-outlet></router-outlet>
 </clr-main-container>
 

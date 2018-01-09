@@ -17,3 +17,18 @@ button.colorless, button.colorless:hover {
 .tooltip-content {
     text-transform: initial;
 }
+
+.btn{
+  background-color: #f26739;
+  font-family: BastardusSans;
+}
+
+.card-block{
+  font-family: BastardusSans;
+}
+
+.card-header{
+  background-color: #f26739;
+  color: #ffffff;
+  font-family: BastardusSans;
+}

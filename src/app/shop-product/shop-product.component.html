@@ -1,19 +1,19 @@
 <div *ngIf="product" class="col-md-12">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header text-center">
       {{product.name}}
     </div>
-    <div class="card-block">
+    <div class="card-block text-center">
       <div class="card-title">
-        <img src="{{product.image}}" height="150px" width="150px">
+        <span><img src="{{product.image}}" height="200px" width="150px"></span>
         <br> {{product.description}}
       </div>
-      <div class="card-text">
+      <div class="card-text text-center">
         {{product.price}} token
       </div>
     </div>
-    <div class="card-footer">
-      <button (click)="orderProduct(product)">Bestel</button>
+    <div class="card-footer text-center">
+      <button class="btn btn-danger"(click)="orderProduct(product)">Bestel</button>
     </div>
   </div>
 </div>

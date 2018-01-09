@@ -1,1 +1,39 @@
+.header-hamburger-trigger > span, .header-hamburger-trigger > span:after, .header-hamburger-trigger > span:before{
+  background: #f26739 !important;
+}
 
+.nav-text, title{
+  color: #666666;
+  font-size: 20px;
+  font-family: BastardusSans;
+}
+
+.header .branding, header .branding {
+  min-width: 0;
+  padding: 0;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .offset-md-2 {
+    margin-left: 0;
+  }
+}
+
+.header-spacer {
+  width: 60px;
+}
+
+.body {
+  overflow: scroll;
+  overflow-y: hidden;
+  overflow-x: visible;
+}
+::-webkit-scrollbar {
+  width: 0px;
+}

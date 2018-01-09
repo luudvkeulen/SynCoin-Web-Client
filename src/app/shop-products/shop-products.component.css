@@ -1,0 +1,34 @@
+.sidenav{
+  background-color: #666666;
+}
+
+.nav-link{
+  color: white;
+  font-family: BastardusSans;
+}
+
+.nav-link:hover{
+  text-decoration: none;
+  font-family: BastardusSans;
+}
+
+#product{
+  color: white;
+  font-family: BastardusSans;
+}
+
+.orange-plus{
+  color: #f26739;
+}
+
+@media screen and (min-width: 400px) and (max-width: 1024px) {
+  .sidenav {
+    display: block; /* show it on small screens */
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 415px) {
+  .sidenav {
+    display: none; /* hide it elsewhere */
+  }
+}

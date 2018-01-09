@@ -7,14 +7,10 @@ h1 {
   text-align: center;
 }
 
-.heading.optional {
-  display: inline-block;
+.btn{
+  background-color: #f26739;
 }
 
-h4 + div.form-group, div.extra-data-wrapper {
-  margin-top: 10px;
-}
-
-.registration-in-progress {
-  max-width: 400px;
+.form-text{
+  font-family: BastardusSans;
 }
