@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let order of _orders.reverse()" [routerLink]="['/admin/order/', order._id]">
+      <tr *ngFor="let order of _orders.reverse()" [routerLink]="['/shop/order/', order._id]">
         <td>{{order._id}}</td>
         <td>{{order.created | date: 'dd/MM/yyyy HH:mm'}}</td>
         <td>{{order.user.surname}} {{order.user.lastname}}</td>

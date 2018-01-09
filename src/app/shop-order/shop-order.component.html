@@ -1,11 +1,14 @@
 <div class="content-container">
   <div class="content-area">
-    Order with id {{ order?.id }}<br />
-    Created: {{ order?.created }}<br />
-    Customer: {{ order?.user.email }}
+    Bestelling {{ order?.id }}<br />
+    Gemaakt op {{ order?.created }}<br />
+    Klant: {{ order?.user.email }}<br />
+    Status: {{ order?.getLastStatus() }}<br />
+    Bedrag: {{ order?.getTotalPrice() }} SYN<br />
+    Bedrag voldaan: {{ order?.getPaidPrice() }} SYN<br />
+    Producten: {{ order?.getProductsAsString() }}<br />
   </div>
 
-  <!-- user.admin -->
   <div *ngIf="user?.isAdmin && order?.canDeliver()">
     <button class="btn btn-primary" (click)="confirmDelivering()">Bevestig verzending</button>
   </div>

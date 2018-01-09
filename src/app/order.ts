@@ -42,4 +42,27 @@ export class Order {
   public canCancel(): boolean {
     return this.isFunded();
   }
+
+  public getLastStatus(): string {
+    if (this.statusUpdates.length) {
+      return 'Created';
+    }
+
+    const status = this.statusUpdates[this.statusUpdates.length - 1].status;
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  }
+
+  public getTotalPrice(): Number {
+    return this.products.reduce((price, product) => Number(price) + Number(product.price), 0);
+  }
+
+  public getPaidPrice(): Number {
+    return this.statusUpdates
+      .filter((statusUpdate) => statusUpdate.status === 'created')
+      .reduce((amount, statusUpdate) => Number(amount) + Number(statusUpdate.amount), 0);
+  }
+
+  public getProductsAsString(): string {
+    return this.products.map((product) => product.name).join(', ');
+  }
 }
