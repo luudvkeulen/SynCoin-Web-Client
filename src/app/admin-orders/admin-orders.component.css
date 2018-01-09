@@ -3,7 +3,27 @@ table tr:hover {
   cursor: pointer;
 }
 
+table {
+  table-layout: fixed;
+}
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
 tbody{
   background-color: #666666;
   color: #ffffff;
 }
+
+@media only screen and (max-width: 416px) {
+  /* horizontal scrollbar for tables if mobile screen */
+  .tablemobile {
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+

@@ -2,6 +2,12 @@
   background: #f26739 !important;
 }
 
+.nav-text, title{
+  color: #666666;
+  font-size: 20px;
+  font-family: BastardusSans;
+}
+
 .header .branding, header .branding {
   min-width: 0;
   padding: 0;

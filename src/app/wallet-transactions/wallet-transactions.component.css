@@ -3,14 +3,37 @@ table tr:hover {
   cursor: pointer;
 }
 
+table {
+  table-layout: fixed;
+}
+
+td {
+  /*
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  */
+
+  /*
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  */
+}
+
 tbody{
   background-color: #666666;
   color: #ffffff;
 }
 
-td {
-  text-align: right;
-  max-width: 50px;
-  min-width: 10px;
-  word-wrap: break-word;
+@media only screen and (max-width: 416px) {
+  .btn{
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .btn{
+    display: none;
+  }
 }
