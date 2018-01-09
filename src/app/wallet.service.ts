@@ -5,8 +5,6 @@ import { HttpService } from './http.service';
 @Injectable()
 export class WalletService {
 
-  url = 'http://localhost:8080/wallet';
-
   constructor(private httpService: HttpService) {
   }
 

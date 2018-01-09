@@ -1,16 +1,18 @@
-import {Injectable} from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import { Injectable, isDevMode } from '@angular/core';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Injectable()
 export class HttpService {
-  // private url: string = 'https://syncoin.luudvankeulen.nl/api/';
-  private url: string = 'http://localhost:8080/';
+  private url: string = 'https://syncoin.luudvankeulen.nl/api/';
 
   constructor(private http: Http) {
+    if (isDevMode()) {
+      this.url = 'http://localhost:8080/';
+    }
   }
 
   createHeaders(withAuthorization: boolean): RequestOptions {
-    const headers = new Headers({'Content-Type': 'application/json'});
+    const headers = new Headers({ 'Content-Type': 'application/json' });
     if (withAuthorization) {
       const authorization = JSON.parse(localStorage.getItem('token'));
       if (authorization) {

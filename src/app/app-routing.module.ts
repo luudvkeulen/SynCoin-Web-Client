@@ -1,18 +1,24 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {ShopComponent} from './shop/shop.component';
-import {WalletComponent} from './wallet/wallet.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {ShopProductsComponent} from './shop-products/shop-products.component';
-import {ShopOrdersComponent} from './shop-orders/shop-orders.component';
-import {WalletBalanceComponent} from './wallet-balance/wallet-balance.component';
-import {WalletSendComponent} from './wallet-send/wallet-send.component';
-import {WalletReceiveComponent} from './wallet-receive/wallet-receive.component';
-import {WalletTransactionsComponent} from './wallet-transactions/wallet-transactions.component';
-import {RegisterComponent} from './register/register.component';
-import {LoginComponent} from './login/login.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { ShopComponent } from './shop/shop.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ShopProductsComponent } from './shop-products/shop-products.component';
+import { ShopOrdersComponent } from './shop-orders/shop-orders.component';
+import { WalletBalanceComponent } from './wallet-balance/wallet-balance.component';
+import { WalletSendComponent } from './wallet-send/wallet-send.component';
+import { WalletReceiveComponent } from './wallet-receive/wallet-receive.component';
+import { WalletTransactionsComponent } from './wallet-transactions/wallet-transactions.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AccountComponent } from './account/account.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { LoginGuard } from './login.guard';
+import { OrdersComponent } from './orders/orders.component';
 
 const appRoutes: Routes = [
   {
@@ -36,7 +42,8 @@ const appRoutes: Routes = [
         redirectTo: 'products',
         pathMatch: 'full'
       }
-    ]
+    ],
+    canActivate: [LoginGuard]
   },
   {
     path: 'wallet',
@@ -67,7 +74,13 @@ const appRoutes: Routes = [
         redirectTo: 'balance',
         pathMatch: 'full'
       }
-    ]
+    ],
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'register',
@@ -76,6 +89,26 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'orders',
+        component: AdminOrdersComponent
+      },
+      {
+        path: 'order/:id',
+        component: AdminOrderComponent
+      },
+      {
+        path: '',
+        redirectTo: 'orders',
+        pathMatch: 'full'
+      }
+    ],
+    canActivate: [LoginGuard]
   },
   {
     path: '',

@@ -1,0 +1,8 @@
+table tr:hover {
+  background-color: #49AFD9;
+  cursor: pointer;
+}
+
+.spinner {
+  margin: auto;
+}
