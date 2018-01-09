@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
+import {WalletService} from '../wallet.service';
 
 @Component({
   selector: 'app-wallet-transactions',
   templateUrl: './wallet-transactions.component.html',
-  styleUrls: ['./wallet-transactions.component.css']
+  styleUrls: ['./wallet-transactions.component.css'],
+  providers: [WalletService]
 })
 export class WalletTransactionsComponent implements OnInit {
   transactions;
   walletAddress;
-
-  constructor(private walletService: WalletService) {
   isCollapsed: boolean;
 
-  constructor() {
+  constructor(private walletService: WalletService) {
   }
 
   ngOnInit() {
@@ -33,6 +33,7 @@ export class WalletTransactionsComponent implements OnInit {
   abs(value: number) {
     return Math.abs(value);
   }
+
   showContent() {
     if (!this.isCollapsed) {
       const tdElements = document.getElementById('tableInfo').getElementsByTagName('td');
