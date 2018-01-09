@@ -2,19 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import {ShopService} from '../shop.service';
 
 @Component({
-  selector: 'app-admin-orders',
-  templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.css'],
+  selector: 'app-user-orders',
+  templateUrl: './user-orders.component.html',
+  styleUrls: ['./user-orders.component.css'],
   providers: [ShopService]
 })
-export class AdminOrdersComponent implements OnInit {
+export class UserOrdersComponent implements OnInit {
   orders;
 
   constructor(private shopService: ShopService) {
   }
 
   ngOnInit() {
-    this.shopService.getAllOrders().subscribe(result => {
+    this.shopService.getUserOrders().subscribe(result => {
       this.orders = result;
     }, err => {
       console.log(err);

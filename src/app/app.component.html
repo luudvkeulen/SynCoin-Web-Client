@@ -25,9 +25,10 @@
             <clr-icon shape="user"></clr-icon>
           </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a routerLink="/register" clrDropdownItem>Registreren</a>
-          <a routerLink="/login" clrDropdownItem>Inloggen</a>
-          <a clrDropdownItem (click)="this.logout()">Uitloggen</a>
+          <a *ngIf="accountService.isUserLoggedIn()" routerLink="/account" clrDropdownItem>Mijn account</a>
+          <a *ngIf="!accountService.isUserLoggedIn()" routerLink="/register" clrDropdownItem>Registreren</a>
+          <a *ngIf="!accountService.isUserLoggedIn()" routerLink="/login" clrDropdownItem>Inloggen</a>
+          <a *ngIf="accountService.isUserLoggedIn()" clrDropdownItem (click)="this.logout()">Uitloggen</a>
         </clr-dropdown-menu>
       </clr-dropdown>
       </div>

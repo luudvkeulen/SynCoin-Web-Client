@@ -1,54 +1,64 @@
-import {Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { WalletService } from '../wallet.service';
 import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-wallet-send',
   templateUrl: './wallet-send.component.html',
-  styleUrls: ['./wallet-send.component.css']
+  styleUrls: ['./wallet-send.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [WalletService]
 })
 export class WalletSendComponent implements OnInit {
-  @Input() address: string = '';
-  @Input() amount: number = 0;
-  data: string = '';
-  password: string = '';
+  amount: number = 0;
+  qrCode: string = '';
+  data: any = false;
 
-  showModal: boolean = false;
+  camOpen: Boolean = false;
 
-  qrCode: String = '';
+  txFailed: Boolean = false;
+  txSuccess: Boolean = false;
+
+  showModal: Boolean = false;
+
 
   constructor(
-    private route: ActivatedRoute,
-    private shopService: ShopService) {
+    private walletService: WalletService,
+    private shopService: ShopService,
+    private route: ActivatedRoute) {
   }
 
-  onQrCodeScanned(event: String): void {
+  onQrCodeScanned(event: string): void {
     console.log('Scanned ', event);
+    this.camOpen = false;
     this.qrCode = event;
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params) {
-        this.address = params.address;
+        this.qrCode = params.address;
         this.amount = params.amount;
         this.data = params.data;
       }
     });
   }
 
-  promptUserToConfirmTransaction() {
-    this.showModal = true;
+  isFormValid() {
+    return (/^(0x)?[0-9a-f]{40}$/i.test(this.qrCode + "") && this.amount > 0)
   }
 
-  exitModal() {
-    this.showModal = false;
+  sendTransaction(password) {
+    console.log(this.data);
+    this.walletService.sendTransaction(password, this.qrCode, this.amount, this.data).subscribe(result => {
+      this.showModal = false;
+      this.txSuccess = true;
+      this.txFailed = false;
+    }, err => {
+      this.showModal = false;
+      this.txFailed = true;
+      this.txSuccess = false;
+    });
   }
-
-  confirmTransaction() {
-    console.log(this.password);
-    this.shopService.confirmTransaction(this.password, this.address, this.amount, this.data)
-      .subscribe(result => console.log(result));
-  }
-
 }

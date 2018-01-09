@@ -1,24 +1,41 @@
+<clr-alert *ngIf="txFailed" [clrAlertType]="'alert-danger'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Er ging iets fout met verzenden, controleer je balans of probeer het opnieuw.
+    </span>
+  </clr-alert-item>
+</clr-alert>
+
+<clr-alert *ngIf="txSuccess" [clrAlertType]="'alert-success'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Verzonden!
+    </span>
+  </clr-alert-item>
+</clr-alert>
+
 <div class="content-container">
   <div class="content-area">
-    <!--<qr-scanner [mirror]="true" [stopAfterScan]="true" [updateTime]="500"
-                [canvasWidth]="320" [canvasHeight]="320"
-                (onRead)="onQrCodeScanned($event)"
-                *ngIf="!qrCode"></qr-scanner>-->
-    <form class="offset-md-3">
-      <section class="form-block form-text">
-        <div class="form-group">
-          <h1>Overmaken</h1>
-        </div>
+
+    <form>
+      <section class="form-block">
+        <label>Overmaken</label>
         <div class="form-group">
           <label for="adres">Adres</label>
-          <input class="input-field" type="text" id="adres" placeholder="Typ of scan een adres" value="{{address}}">
+          <input type="text" id="adres" placeholder="Typ of scan een adres" name="address" [(ngModel)]="qrCode">
+          <button type="button" class="btn btn-outline-primary" (click)="camOpen = !camOpen">
+            <clr-icon shape="camera"></clr-icon>
+          </button>
         </div>
+
+        <qr-scanner [mirror]="true" [stopAfterScan]="true" [updateTime]="500" [canvasWidth]="320" [canvasHeight]="320" (onRead)="onQrCodeScanned($event)"
+          *ngIf="camOpen"></qr-scanner>
         <div class="form-group">
           <label for="bedrag">Bedrag</label>
-          <input class="input-field" type="number" id="bedrag" placeholder="Voer een bedrag in" value="{{amount}}">
+          <input type="number" id="bedrag" name="amount" placeholder="Voer een bedrag in" [(ngModel)]="amount">
         </div>
         <div class="form-group">
-          <button (click)="promptUserToConfirmTransaction()" class="btn btn-danger">Bevestig betaling</button>
+          <button class="btn btn-primary" [disabled]="!isFormValid()" (click)="showModal = true">Bevestig betaling</button>
         </div>
       </section>
     </form>
@@ -26,22 +43,24 @@
 </div>
 
 <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
-  <h3 class="modal-title form-text">Bevestig transactie</h3>
+  <h3 class="modal-title">Bevestig transactie</h3>
   <div class="modal-body">
+
     <form>
-      <section class="form-block form-text">
+      <section class="form-block">
+        <b>Stuur {{amount}} syn naar {{qrCode}}</b>
         <div class="form-group">
           <p>Voer uw wachtwoord in om de transactie te bevestigen.</p>
         </div>
         <div class="form-group">
-          <label class="form-text" for="password">Wachtwoord:</label>
+          <label for="password">Wachtwoord:</label>
           <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" id="password" />
         </div>
       </section>
     </form>
   </div>
-  <div class="modal-footer form-text">
-    <button type="button" class="btn btn-outline-danger" (click)="exitModal()">Annuleer bestelling</button>
-    <button type="button" class="btn btn-danger" (click)="confirmTransaction()">Bevestig transactie</button>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="showModal = false">Annuleer bestelling</button>
+    <button type="button" class="btn btn-primary" (click)="sendTransaction(password)">Bevestig transactie</button>
   </div>
 </clr-modal>

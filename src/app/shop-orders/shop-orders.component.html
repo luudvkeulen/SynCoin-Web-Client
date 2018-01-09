@@ -1,38 +1,5 @@
 <div class="content-container">
   <div class="content-area">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Besteller</th>
-        <th>Product</th>
-        <th>Aantal</th>
-        <th>Status</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr [routerLink]="['/admin/order/', 1]">
-        <td>#1</td>
-        <td>{{user}}</td>
-        <td>SynTouch Blond</td>
-        <td>1</td>
-        <td>Betaald</td>
-      </tr>
-      <tr>
-        <td>#2</td>
-        <td>{{user}}</td>
-        <td>SynTouch Bruin</td>
-        <td>1</td>
-        <td>Nog niet betaald</td>
-      </tr>
-      <tr>
-        <td>#3</td>
-        <td>{{user}}</td>
-        <td>SynTouch Blond</td>
-        <td>1</td>
-        <td>Afgeleverd</td>
-      </tr>
-      </tbody>
-    </table>
+    <app-user-orders></app-user-orders>
   </div>
 </div>
