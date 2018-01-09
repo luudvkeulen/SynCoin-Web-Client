@@ -6,16 +6,33 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./wallet-transactions.component.css']
 })
 export class WalletTransactionsComponent implements OnInit {
+  transactions;
+  walletAddress;
 
+  constructor(private walletService: WalletService) {
   isCollapsed: boolean;
 
   constructor() {
   }
 
   ngOnInit() {
+    this.walletService.getUserTransactions().subscribe((result) => {
+      this.transactions = result;
+    }, err => {
+      console.log(err);
+    });
+
+    this.walletService.getWalletAddress().subscribe(result => {
+      this.walletAddress = result.address;
+    }, err => {
+      console.log(err);
+    });
     this.showContent();
   }
 
+  abs(value: number) {
+    return Math.abs(value);
+  }
   showContent() {
     if (!this.isCollapsed) {
       const tdElements = document.getElementById('tableInfo').getElementsByTagName('td');

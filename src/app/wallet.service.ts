@@ -37,4 +37,12 @@ export class WalletService {
       .map(result => result)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  getUserTransactions(): Observable<any> {
+    return this
+      .httpService
+      .get('wallet/usertransactions/', true)
+      .map(result => result.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

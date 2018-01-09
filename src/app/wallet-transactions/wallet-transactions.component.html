@@ -1,65 +1,19 @@
 <div class="content-container">
   <div class="content-area">
-
-    <button (click)="showContent()" class="btn btn-danger form-text">Expand content</button>
-
-    <table id="tableInfo" class="table">
+    <table class="table">
       <thead>
       <tr>
-        <th>TxHash</th>
-        <th>Block</th>
-        <th>Age</th>
         <th>From</th>
         <th>To</th>
-        <th>Value</th>
-        <th>TxFee</th>
+        <th>Amount</th>
       </tr>
       </thead>
       <tbody>
-      <tr [routerLink]="['/admin/order/', 1]">
-        <td>0xa125811fd3e461825598a8102c55747c4907ce1407c8ca3e5777da3c5e7a2f34</td>
-        <td>4759951</td>
-        <td>43 secs ago</td>
-        <td>0x35b63db25d8c68b847ed832d80dfe180877a79a4</td>
-        <td>0x37b80c2decf35ba370c37a2a86ecb32c7f4a3f32</td>
-        <td>2.55 Ether</td>
-        <td>0.000084204 Ether</td>
-      </tr>
-      <tr>
-        <td>0xa125811fd3e461825598a8102c55747c4907ce1407c8ca3e5777da3c5e7a2f34</td>
-        <td>4759951</td>
-        <td>46 secs ago</td>
-        <td>0x35b63db25d8c68b847ed832d80dfe180877a79a4</td>
-        <td>0x37b80c2decf35ba370c37a2a86ecb32c7f4a3f32</td>
-        <td>2.55 Ether</td>
-        <td>0.000084204 Ether</td>
-      </tr>
-      <tr>
-        <td>0xa125811fd3e461825598a8102c55747c4907ce1407c8ca3e5777da3c5e7a2f34</td>
-        <td>4759951</td>
-        <td>50 secs ago</td>
-        <td>0x35b63db25d8c68b847ed832d80dfe180877a79a4</td>
-        <td>0x37b80c2decf35ba370c37a2a86ecb32c7f4a3f32</td>
-        <td>2.55 Ether</td>
-        <td>0.000084204 Ether</td>
-      </tr>
-      <tr>
-        <td>0xa125811fd3e461825598a8102c55747c4907ce1407c8ca3e5777da3c5e7a2f34</td>
-        <td>4759951</td>
-        <td>56 secs ago</td>
-        <td>0x35b63db25d8c68b847ed832d80dfe180877a79a4</td>
-        <td>0x37b80c2decf35ba370c37a2a86ecb32c7f4a3f32</td>
-        <td>2.55 Ether</td>
-        <td>0.000084204 Ether</td>
-      </tr>
-      <tr>
-        <td>0xa125811fd3e461825598a8102c55747c4907ce1407c8ca3e5777da3c5e7a2f34</td>
-        <td>4759951</td>
-        <td>60 secs ago</td>
-        <td>0x35b63db25d8c68b847ed832d80dfe180877a79a4</td>
-        <td>0x37b80c2decf35ba370c37a2a86ecb32c7f4a3f32</td>
-        <td>2.55 Ether</td>
-        <td>0.000084204 Ether</td>
+      <tr *ngFor="let transaction of transactions">
+        <td *ngIf="transaction.amount > 0">{{walletAddress}}</td>
+        <td>{{transaction.counterAddress}}</td>
+        <td *ngIf="transaction.amount <= 0">{{walletAddress}}</td>
+        <td>{{abs(transaction.amount)}}</td>
       </tr>
       </tbody>
     </table>
