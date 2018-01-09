@@ -44,8 +44,8 @@ export class Order {
   }
 
   public getLastStatus(): string {
-    if (this.statusUpdates.length) {
-      return 'Created';
+    if (!this.statusUpdates.length) {
+      return '-';
     }
 
     const status = this.statusUpdates[this.statusUpdates.length - 1].status;

@@ -38,14 +38,14 @@ const appRoutes: Routes = [
         component: ShopOrdersComponent
       },
       {
-        path: '',
-        redirectTo: 'products',
-        pathMatch: 'full'
-      },
-      {
         path: 'order/:id',
         component: ShopOrderComponent
       },
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      }
     ],
     canActivate: [LoginGuard]
   },
