@@ -9,7 +9,7 @@ import {WalletService} from '../wallet.service';
 })
 export class WalletBalanceComponent implements OnInit {
 
-  balance: number;
+  balance: string;
 
   constructor(private walletService: WalletService) {
   }
@@ -20,8 +20,7 @@ export class WalletBalanceComponent implements OnInit {
 
   getBalance() {
     this.walletService.getBalance().subscribe(result => {
-      console.log(result);
-      this.balance = result / 1000000000000000000;
+      this.balance = Number(result).toFixed(2);
     }, err => {
       console.log(err);
     });
