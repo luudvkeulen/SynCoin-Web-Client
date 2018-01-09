@@ -1,8 +1,31 @@
 table tr:hover {
-  background-color: #49AFD9;
+  background-color: #f26739;
   cursor: pointer;
+}
+
+table {
+  table-layout: fixed;
+}
+
+tbody{
+  background-color: #666666;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 416px) {
+  .btn{
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .btn{
+    display: none;
+  }
 }
 
 .spinner {
   margin: auto;
 }
+
+

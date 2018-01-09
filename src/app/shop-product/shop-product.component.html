@@ -36,7 +36,7 @@
 <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
   <h3 class="modal-title">Wachten op betaling van {{product.name}}: {{product.description}} | {{countDownTimer | async}}</h3>
   <div class="modal-body">
-    <clr-alert *ngIf="orderCanceled" [clrAlertClosable]="false" [clrAlertType]="'alert-info'" [clrAlertAppLevel]="true">
+    <clr-alert *ngIf="orderCanceled" [clrAlertClosable]="false" [clrAlertType]="'alert-warning'" [clrAlertAppLevel]="true">
       <div clr-alert-item class="alert-item">
         <span class="alert-text">
           Tijdslimiet voor het betalen van de bestelling is verstreken, uw bestelling is geannuleerd.
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!orderCanceled" type="button" class="btn btn-outline" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
-    <button *ngIf="orderCanceled" type="button" class="btn btn-outline" (click)="hideModal()">Ga terug</button>
+    <button *ngIf="!orderCanceled" type="button" class="btn btn-danger" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
+    <button *ngIf="orderCanceled" type="button" class="btn btn-danger" (click)="hideModal()">Ga terug</button>
   </div>
 </clr-modal>

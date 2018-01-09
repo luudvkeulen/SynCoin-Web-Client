@@ -7,7 +7,6 @@ import {AccountService} from '../account.service';
   styleUrls: ['./shop-orders.component.css']
 })
 export class ShopOrdersComponent implements OnInit {
-
   user: String;
 
   constructor() {
