@@ -23,7 +23,7 @@
         <div class="form-group">
           <label for="adres">Adres</label>
           <input type="text" id="adres" placeholder="Typ of scan een adres" name="address" [(ngModel)]="qrCode">
-          <button type="button" class="btn btn-outline-primary" (click)="camOpen = !camOpen">
+          <button type="button" class="btn btn-outline-danger" (click)="camOpen = !camOpen">
             <clr-icon shape="camera"></clr-icon>
           </button>
         </div>
@@ -35,7 +35,7 @@
           <input type="number" id="bedrag" name="amount" placeholder="Voer een bedrag in" [(ngModel)]="amount">
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" [disabled]="!isFormValid()" (click)="showModal = true">Bevestig betaling</button>
+          <button class="btn btn-danger" [disabled]="!isFormValid()" (click)="showModal = true">Bevestig betaling</button>
         </div>
       </section>
     </form>
@@ -60,7 +60,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="showModal = false">Annuleer bestelling</button>
-    <button type="button" class="btn btn-primary" (click)="sendTransaction(password)">Bevestig transactie</button>
+    <button type="button" class="btn btn-danger-outline" (click)="showModal = false">Annuleer bestelling</button>
+    <button type="button" class="btn btn-danger" (click)="sendTransaction(password)">Bevestig transactie</button>
   </div>
 </clr-modal>
