@@ -6,11 +6,11 @@ import {ShopService} from '../shop.service';
 import {Order} from '../order';
 
 @Component({
-  selector: 'app-admin-order',
-  templateUrl: './admin-order.component.html',
-  styleUrls: ['./admin-order.component.css']
+  selector: 'app-shop-order',
+  templateUrl: './shop-order.component.html',
+  styleUrls: ['./shop-order.component.css']
 })
-export class AdminOrderComponent implements OnInit, OnDestroy {
+export class ShopOrderComponent implements OnInit, OnDestroy {
   protected orderId: string;
   private routeSubscription: any;
   protected user: User;
@@ -25,6 +25,8 @@ export class AdminOrderComponent implements OnInit, OnDestroy {
       this.orderId = params['id'];
 
       this.shopService.getOrder(this.orderId).subscribe(order => {
+        console.log(order);
+
         this.order = order;
       });
     });
