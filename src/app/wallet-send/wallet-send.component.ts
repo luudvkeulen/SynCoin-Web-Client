@@ -22,7 +22,6 @@ export class WalletSendComponent implements OnInit {
 
   showModal: Boolean = false;
 
-
   constructor(
     private walletService: WalletService,
     private shopService: ShopService,

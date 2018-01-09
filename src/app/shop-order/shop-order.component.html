@@ -1,0 +1,60 @@
+<clr-alert *ngIf="txFailed" [clrAlertType]="'alert-danger'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Er ging iets fout met het verzenden van de transactie.
+    </span>
+  </clr-alert-item>
+</clr-alert>
+
+<clr-alert *ngIf="txSuccess" [clrAlertType]="'alert-success'" [clrAlertAppLevel]="true">
+  <clr-alert-item>
+    <span class="alert-text">
+      Transactie uitgevoerd!
+    </span>
+  </clr-alert-item>
+</clr-alert>
+
+<clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Bevestig transactie</h3>
+  <div class="modal-body">
+    <form>
+      <section class="form-block">
+        <div class="form-group">
+          <p>Voer uw wachtwoord in om de transactie te bevestigen.</p>
+        </div>
+        <div class="form-group">
+          <label for="password">Wachtwoord:</label>
+          <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" id="password" />
+        </div>
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="showModal = false">Annuleer bestelling</button>
+    <button type="button" class="btn btn-primary" (click)="sendTransaction(password)">Bevestig transactie</button>
+  </div>
+</clr-modal>
+
+<div class="content-container">
+  <div class="content-area">
+    Bestelling {{ order?.id }}<br />
+    Gemaakt op {{ order?.created }}<br />
+    Klant: {{ order?.user.email }}<br />
+    Status: {{ order?.getLastStatus() }}<br />
+    Bedrag: {{ order?.getTotalPrice() }} SYN<br />
+    Bedrag voldaan: {{ order?.getPaidPrice() }} SYN<br />
+    Producten: {{ order?.getProductsAsString() }}<br />
+  </div>
+
+  <div *ngIf="user?.isAdmin && order?.canDeliver()">
+    <button class="btn btn-primary" (click)="confirmDelivering()">Bevestig verzending</button>
+  </div>
+
+  <div *ngIf="order && user && order.user.id == user.id && order.canReceive()">
+    <button class="btn btn-primary" (click)="confirmReceived()">Bevestig ontvangst</button>
+  </div>
+
+  <div *ngIf="order && user && order.user.id == user.id && order.canCancel()">
+    <button class="btn btn-primary" (click)="cancel()">Annuleer bestelling</button>
+  </div>
+</div>

@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
-import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { ShopOrderComponent } from './shop-order/shop-order.component';
 import { LoginGuard } from './login.guard';
 import { OrdersComponent } from './orders/orders.component';
 
@@ -36,6 +36,10 @@ const appRoutes: Routes = [
       {
         path: 'orders',
         component: ShopOrdersComponent
+      },
+      {
+        path: 'order/:id',
+        component: ShopOrderComponent
       },
       {
         path: '',
@@ -97,10 +101,6 @@ const appRoutes: Routes = [
       {
         path: 'orders',
         component: AdminOrdersComponent
-      },
-      {
-        path: 'order/:id',
-        component: AdminOrderComponent
       },
       {
         path: '',
