@@ -16,7 +16,7 @@ export class ShopProductComponent implements OnInit {
   order: OrderRequest;
   showModal: boolean = false;
 
-  paymentTimeLimitSeconds: number = 10;
+  paymentTimeLimitSeconds: number = 10 * 60;
 
   timeLeft: number;
   countDownTimer: Observable<any>;
