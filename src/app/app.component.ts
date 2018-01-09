@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(protected accountService: AccountService, private router: Router) {
   }
 
   logout() {
