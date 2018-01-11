@@ -46,14 +46,16 @@
 
     <div class="qr-code-wrapper" *ngIf="!orderCanceled && order">
       <!-- If an order isn't known yet, don't try to set the values inside the div -->
-      <qr-code [value]="paymentLink" [size]="250" [backgroundAlpha]="0.0" class="qr"></qr-code>
-      <button (click)="openPaymentPage()" class="btn btn-primary">
+      <qr-code [value]="paymentLink" [size]="350" [backgroundAlpha]="0.0" class="qr"></qr-code>
+      <button (click)="openPaymentPage()" class="btn btn-danger btn-block">
         Ga naar wallet
       </button>
+
+      <button *ngIf="!orderCanceled" type="button" class="btn btn-danger btn-block" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
+
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!orderCanceled" type="button" class="btn btn-danger" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
     <button *ngIf="orderCanceled" type="button" class="btn btn-danger" (click)="hideModal()">Ga terug</button>
   </div>
 </clr-modal>
