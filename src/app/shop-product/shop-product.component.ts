@@ -57,11 +57,14 @@ export class ShopProductComponent implements OnInit {
   }
 
   openPaymentPage() {
-    this.socketService.awaitPayment()
-      .subscribe(id => {
-        localStorage.setItem('socket-id', id);
+    const subscription = this.socketService.awaitPayment()
+      .subscribe(data => {
+        localStorage.setItem('socket-id', data.id);
         window.open(`${this.paymentLink}`);
-      }, () => window.open(this.paymentLink),
+      }, () => {
+        window.open(this.paymentLink);
+        subscription.unsubscribe()
+      },
       () => this.paymentReceived = true);
   }
 }
