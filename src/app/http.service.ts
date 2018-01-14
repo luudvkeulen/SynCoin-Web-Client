@@ -1,5 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpService {
@@ -25,7 +26,7 @@ export class HttpService {
     });
   }
 
-  post(endPoint: string, body: object, useAuthorization: boolean) {
+  post(endPoint: string, body: object, useAuthorization: boolean): Observable<any> {
     return this.http.post(`${this.url}${endPoint}`, body, this.createHeaders(useAuthorization));
   }
 

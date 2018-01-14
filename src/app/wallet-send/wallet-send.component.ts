@@ -14,6 +14,7 @@ export class WalletSendComponent implements OnInit {
   amount: number = 0;
   qrCode: string = '';
   data: any = false;
+  socketId: string = '';
 
   camOpen: Boolean = false;
 
@@ -40,6 +41,9 @@ export class WalletSendComponent implements OnInit {
         this.qrCode = params.address;
         this.amount = params.amount;
         this.data = params.data;
+        if (this.data && this.data !== '') {
+          this.socketId = localStorage.getItem('socket-id') || '';
+        }
       }
     });
   }
@@ -50,7 +54,7 @@ export class WalletSendComponent implements OnInit {
 
   sendTransaction(password) {
     console.log(this.data);
-    this.walletService.sendTransaction(password, this.qrCode, this.amount, this.data).subscribe(result => {
+    this.walletService.sendTransaction(password, this.qrCode, this.amount, this.data, this.socketId).subscribe(result => {
       this.showModal = false;
       this.txSuccess = true;
       this.txFailed = false;

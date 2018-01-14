@@ -32,3 +32,8 @@ button.colorless, button.colorless:hover {
   color: #ffffff;
   font-family: BastardusSans;
 }
+
+.qr img {
+  height: 350px;
+  width :350px;
+}

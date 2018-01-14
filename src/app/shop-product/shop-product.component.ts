@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Observable } from 'rxjs/Rx';
-import {ShopService} from '../shop.service';
-import {OrderRequest} from '../order-request';
+import { ShopService } from '../shop.service';
+import { OrderRequest } from '../order-request';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-shop-product',
@@ -16,51 +17,29 @@ export class ShopProductComponent implements OnInit {
   order: OrderRequest;
   showModal: boolean = false;
 
-  paymentTimeLimitSeconds: number = 1 * 60;
-
-  timeLeft: number;
-  countDownTimer: Observable<any>;
-
   orderCanceled: boolean = false;
+  paymentReceived: Boolean = false;
 
-  constructor(private shopService: ShopService) {
+  constructor(
+    private shopService: ShopService,
+    private socketService: SocketService) {
   }
 
   ngOnInit() {
   }
 
   resetOrder() {
-    this.timeLeft = this.paymentTimeLimitSeconds;
     this.orderCanceled = false;
+    this.paymentReceived = false;
   }
 
   orderProduct() {
-    const emptyFunction = () => {
-    };
-
     this.shopService.createOrder([this.product])
       .subscribe(result => {
         this.order = result.json();
         this.paymentLink = `${window.location.origin}/wallet/confirm-payment/${this.order.address}/${this.order.amount}/${this.order.data}`;
-
         this.showModal = true;
         this.resetOrder();
-        this.countDownTimer = Observable.timer(150, 1000)
-          .take(this.timeLeft)
-          // Stops counting down until one of the three expressions is true.
-          .takeWhile(() => this.timeLeft !== 0 || this.orderCanceled)
-          .do(emptyFunction
-            , emptyFunction
-            , () => {
-              // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
-              this.cancelOrder();
-            })
-          .map(() => {
-            --this.timeLeft
-            const amountOfMinutesLeft = Math.floor((this.timeLeft / 60) % 60).toString();
-            const amountOfSecondsLeft = (this.timeLeft % 60).toString();
-            return `${amountOfMinutesLeft.length === 1 ? `0${amountOfMinutesLeft}` : amountOfMinutesLeft}:${amountOfSecondsLeft.length === 1 ? `0${amountOfSecondsLeft}` : amountOfSecondsLeft}`;
-          });
       });
   }
 
@@ -78,6 +57,11 @@ export class ShopProductComponent implements OnInit {
   }
 
   openPaymentPage() {
-    window.open(this.paymentLink);
+    this.socketService.awaitPayment()
+      .subscribe(id => {
+        localStorage.setItem('socket-id', id);
+        window.open(`${this.paymentLink}`);
+      }, () => window.open(this.paymentLink),
+      () => this.paymentReceived = true);
   }
 }
