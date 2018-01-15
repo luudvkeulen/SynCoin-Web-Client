@@ -28,21 +28,23 @@
         </span>
       </div>
     </clr-alert>
-    <clr-alert *ngIf="paymentReceived" [clrAlertClosable]="false" [clrAlertType]="'alert-success'" [clrAlertAppLevel]="true">
-      <div clr-alert-item class="alert-item">
-        <span class="alert-text">
-          Uw betaling is ontvangen!
+    <div *ngIf="paymentReceived || paymentInProgress" class="progress-wrapper">
+      <clr-alert *ngIf="paymentReceived" class="payment-received" [clrAlertClosable]="false" [clrAlertType]="'alert-success'" [clrAlertAppLevel]="true">
+        <div clr-alert-item class="alert-item">
+          <span class="alert-text">
+            Uw betaling is ontvangen!
+          </span>
+        </div>
+      </clr-alert>
+
+      <div *ngIf="paymentInProgress" class="payment-in-progress">
+        <span class="spinner">
+          Loading...
         </span>
       </div>
-    </clr-alert>
-
-    <div *ngIf="paymentInProgress">
-      <span class="spinner">
-        Loading...
-      </span>
     </div>
 
-    <div *ngIf="!paymentInProgress">
+    <div *ngIf="!paymentInProgress || paymentReceived">
       <div class="qr-code-wrapper" *ngIf="(!orderCanceled && order) && !paymentReceived">
         <!-- If an order isn't known yet, don't try to set the values inside the div -->
         <qr-code [value]="paymentLink" [size]="350" [backgroundAlpha]="0.0" class="qr"></qr-code>
@@ -52,7 +54,10 @@
       </div>
     </div>
 
-    <button *ngIf="!orderCanceled || paymentInProgress" type="button" class="btn btn-danger btn-block" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
+    <button *ngIf="!orderCanceled && (paymentInProgress || !paymentReceived)" type="button" class="btn btn-danger btn-block"
+      (click)="cancelOrderAndExitModal()">
+      Annuleer bestelling
+    </button>
   </div>
   <div class="modal-footer">
     <button *ngIf="orderCanceled || paymentReceived" type="button" class="btn btn-danger" (click)="hideModal()">Ga terug</button>

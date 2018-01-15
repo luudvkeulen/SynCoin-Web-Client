@@ -60,15 +60,17 @@ export class ShopProductComponent implements OnInit {
   }
 
   openPaymentPage() {
+    this.paymentInProgress = true;
     const subscription = this.socketService.awaitPayment()
       .subscribe(data => {
-        this.paymentInProgress = true;
         localStorage.setItem('socket-id', data.id);
         window.open(`${this.paymentLink}`);
       }, () => {
+        subscription.unsubscribe();
         window.open(this.paymentLink);
-        subscription.unsubscribe()
-      },
-      () => this.paymentReceived = true);
+      }, () => {
+        this.paymentInProgress = false;
+        this.paymentReceived = true
+      });
   }
 }

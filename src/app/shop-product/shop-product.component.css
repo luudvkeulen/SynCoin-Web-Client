@@ -2,6 +2,17 @@
     text-align: center;
 }
 
+.progress-wrapper {
+  display: table;
+  min-height: 350px;
+  width: 100%;
+}
+
+.progress-wrapper .payment-received, .progress-wrapper .payment-in-progress {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .qr-code-wrapper {
     text-align: center;
 }
