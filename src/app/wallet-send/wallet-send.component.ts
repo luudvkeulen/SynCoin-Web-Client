@@ -14,6 +14,8 @@ export class WalletSendComponent implements OnInit {
   amount: number = 0;
   qrCode: string = '';
   data: any = false;
+  socketId: string = '';
+  reference: string = '';
 
   camOpen: Boolean = false;
 
@@ -21,6 +23,8 @@ export class WalletSendComponent implements OnInit {
   txSuccess: Boolean = false;
 
   showModal: Boolean = false;
+
+  isOrderPayment: Boolean = false;
 
   constructor(
     private walletService: WalletService,
@@ -40,6 +44,11 @@ export class WalletSendComponent implements OnInit {
         this.qrCode = params.address;
         this.amount = params.amount;
         this.data = params.data;
+        if (this.data && this.data !== '') {
+          this.isOrderPayment = true;
+          this.socketId = localStorage.getItem('socket-id') || '';
+          this.reference = params.reference;
+        }
       }
     });
   }
@@ -49,15 +58,30 @@ export class WalletSendComponent implements OnInit {
   }
 
   sendTransaction(password) {
-    console.log(this.data);
-    this.walletService.sendTransaction(password, this.qrCode, this.amount, this.data).subscribe(result => {
-      this.showModal = false;
-      this.txSuccess = true;
-      this.txFailed = false;
-    }, err => {
-      this.showModal = false;
-      this.txFailed = true;
-      this.txSuccess = false;
-    });
+    if (this.data && this.data !== '') {
+      this.walletService.payOrder(password, this.qrCode, this.amount, this.data, this.reference, this.socketId).subscribe(result => {
+        this.transactionSucceeded();
+      }, err => {
+        this.transactionFailed();
+      });
+    } else {
+      this.walletService.sendTransaction(password, this.qrCode, this.amount, this.data).subscribe(result => {
+        this.transactionSucceeded();
+      }, err => {
+        this.transactionFailed();
+      });
+    }
+  }
+
+  transactionSucceeded() {
+    this.showModal = false;
+    this.txSuccess = true;
+    this.txFailed = false;
+  }
+
+  transactionFailed() {
+    this.showModal = false;
+    this.txFailed = true;
+    this.txSuccess = false;
   }
 }

@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Observable } from 'rxjs/Rx';
-import {ShopService} from '../shop.service';
-import {OrderRequest} from '../order-request';
+import { ShopService } from '../shop.service';
+import { OrderRequest } from '../order-request';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-shop-product',
@@ -16,51 +17,36 @@ export class ShopProductComponent implements OnInit {
   order: OrderRequest;
   showModal: boolean = false;
 
-  paymentTimeLimitSeconds: number = 1 * 60;
-
-  timeLeft: number;
-  countDownTimer: Observable<any>;
-
   orderCanceled: boolean = false;
 
-  constructor(private shopService: ShopService) {
+  paymentInProgress: Boolean = false;
+  paymentNotConfirmedByUser: Boolean = true;
+  transactionInProgress: Boolean = false;
+  transactionMined: Boolean = false;
+
+  constructor(
+    private shopService: ShopService,
+    private socketService: SocketService) {
   }
 
   ngOnInit() {
   }
 
   resetOrder() {
-    this.timeLeft = this.paymentTimeLimitSeconds;
     this.orderCanceled = false;
+    this.paymentInProgress = false;
+    this.paymentNotConfirmedByUser = true;
+    this.transactionInProgress = false;
+    this.transactionMined = false;
   }
 
   orderProduct() {
-    const emptyFunction = () => {
-    };
-
+    this.resetOrder();
     this.shopService.createOrder([this.product])
       .subscribe(result => {
         this.order = result.json();
-        this.paymentLink = `${window.location.origin}/wallet/confirm-payment/${this.order.address}/${this.order.amount}/${this.order.data}`;
-
+        this.paymentLink = `${window.location.origin}/wallet/confirm-payment/${this.order.address}/${this.order.amount}/${this.order.data}/${this.order.reference}`;
         this.showModal = true;
-        this.resetOrder();
-        this.countDownTimer = Observable.timer(150, 1000)
-          .take(this.timeLeft)
-          // Stops counting down until one of the three expressions is true.
-          .takeWhile(() => this.timeLeft !== 0 || this.orderCanceled)
-          .do(emptyFunction
-            , emptyFunction
-            , () => {
-              // This will be executed when the timer is done (when one of the three expressions above evaluate to true).
-              this.cancelOrder();
-            })
-          .map(() => {
-            --this.timeLeft
-            const amountOfMinutesLeft = Math.floor((this.timeLeft / 60) % 60).toString();
-            const amountOfSecondsLeft = (this.timeLeft % 60).toString();
-            return `${amountOfMinutesLeft.length === 1 ? `0${amountOfMinutesLeft}` : amountOfMinutesLeft}:${amountOfSecondsLeft.length === 1 ? `0${amountOfSecondsLeft}` : amountOfSecondsLeft}`;
-          });
       });
   }
 
@@ -78,6 +64,22 @@ export class ShopProductComponent implements OnInit {
   }
 
   openPaymentPage() {
-    window.open(this.paymentLink);
+    this.paymentInProgress = true;
+    const subscription = this.socketService.awaitPayment()
+      .subscribe(event => {
+        if (event.type === 'connected') {
+          localStorage.setItem('socket-id', event.data.id);
+          window.open(`${this.paymentLink}`);
+        } else if (event.type === 'user-sent-transaction') {
+          this.paymentNotConfirmedByUser = false;
+          this.transactionInProgress = true;
+        }
+      }, () => {
+        window.open(this.paymentLink);
+      }, () => {
+        this.paymentInProgress = false;
+        this.transactionInProgress = false;
+        this.transactionMined = true;
+      });
   }
 }

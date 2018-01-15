@@ -59,4 +59,18 @@ export class AccountService {
       return false;
     }
   }
+
+  getToken() {
+    try {
+      const tokenJSON = localStorage.getItem('token');
+      const tokenObject = JSON.parse(tokenJSON);
+      if (tokenObject.token) {
+        return tokenObject.token;
+      } else {
+        return '';
+      }
+    } catch (error) {
+      return '';
+    }
+  }
 }

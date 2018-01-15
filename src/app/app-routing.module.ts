@@ -62,7 +62,7 @@ const appRoutes: Routes = [
         component: WalletSendComponent
       },
       {
-        path: 'confirm-payment/:address/:amount/:data',
+        path: 'confirm-payment/:address/:amount/:data/:reference',
         component: WalletSendComponent
       },
       {

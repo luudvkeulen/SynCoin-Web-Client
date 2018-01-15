@@ -33,6 +33,7 @@ import { LoginGuard } from './login.guard';
 import { AccountService } from './account.service';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { SocketService } from './socket.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
     HttpService,
     ShopService,
     AccountService,
-    LoginGuard
+    LoginGuard,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })

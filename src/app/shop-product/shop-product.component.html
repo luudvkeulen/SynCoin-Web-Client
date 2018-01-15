@@ -5,7 +5,7 @@
     </div>
     <div class="card-block text-center">
       <div class="card-title">
-        <span><img src="{{product.image}}" height="200px" width="150px"></span>
+        <img src="{{product.image}}" height="200px" width="150px">
         <br> {{product.description}}
       </div>
       <div class="card-text text-center">
@@ -13,49 +13,51 @@
       </div>
     </div>
     <div class="card-footer text-center">
-      <button class="btn btn-danger"(click)="orderProduct(product)">Bestel</button>
+      <button class="btn btn-danger" (click)="orderProduct(product)">Bestel</button>
     </div>
   </div>
 </div>
 
-<!-- Copy to clipboard example (doesn't work in the modal) -->
-<!-- <div class="input-group">
-  <input type="text" class="form-control" [(ngModel)]="address" placeholder="content will be copy after click the copy button">
-  <span class="input-group-btn">
-    <button class="btn btn-link colorless" type="button" ngxClipboard [cbContent]="address">
-      <clr-tooltip>
-        <clr-icon class="is-solid" shape="copy" clrTooltipTrigger></clr-icon>
-        <clr-tooltip-content *clrIfOpen>
-          <span>Kopieer code naar klembord</span>
-        </clr-tooltip-content>
-      </clr-tooltip>
-    </button>
-  </span>
-</div> -->
-
 <clr-modal [(clrModalOpen)]="showModal" [clrModalSize]="'lg'" [clrModalClosable]="false" [clrModalStaticBackdrop]="true">
-  <h3 class="modal-title">Wachten op betaling van {{product.name}}: {{product.description}} | {{countDownTimer | async}}</h3>
+  <h3 class="modal-title">Wachten op betaling van {{product.name}}: {{product.description}}</h3>
   <div class="modal-body">
-    <clr-alert *ngIf="orderCanceled" [clrAlertClosable]="false" [clrAlertType]="'alert-warning'" [clrAlertAppLevel]="true">
-      <div clr-alert-item class="alert-item">
-        <span class="alert-text">
-          Tijdslimiet voor het betalen van de bestelling is verstreken, uw bestelling is geannuleerd.
+    <div *ngIf="paymentInProgress || transactionMined" class="progress-wrapper">
+      <div *ngIf="paymentNotConfirmedByUser" class="awaiting-user-payment-confirmation">
+        <span class="spinner">
+          Loading...
         </span>
+        <p>Wachten op goedkeuren transactie...</p>
       </div>
-    </clr-alert>
 
-    <div class="qr-code-wrapper" *ngIf="!orderCanceled && order">
-      <!-- If an order isn't known yet, don't try to set the values inside the div -->
-      <qr-code [value]="paymentLink" [size]="350" [backgroundAlpha]="0.0" class="qr"></qr-code>
-      <button (click)="openPaymentPage()" class="btn btn-danger btn-block">
-        Ga naar wallet
-      </button>
+      <div *ngIf="transactionInProgress" class="payment-in-progress">
+        <span class="spinner">
+          Loading...
+        </span>
+        <p>Uw transactie wordt verwerkt...</p>
+      </div>
 
-      <button *ngIf="!orderCanceled" type="button" class="btn btn-danger btn-block" (click)="cancelOrderAndExitModal()">Annuleer bestelling</button>
-
+      <div *ngIf="transactionMined" class="payment-received">
+        <clr-icon shape="check" size="72" class="is-success"></clr-icon>
+        <p>Uw transactie is verwerkt!</p>
+      </div>
     </div>
+
+    <div *ngIf="!paymentInProgress || transactionMined">
+      <div class="qr-code-wrapper" *ngIf="(!orderCanceled && order) && !transactionMined">
+        <!-- If an order isn't known yet, don't try to set the values inside the div -->
+        <qr-code [value]="paymentLink" [size]="350" [backgroundAlpha]="0.0" class="qr"></qr-code>
+        <button (click)="openPaymentPage()" class="btn btn-danger btn-block">
+          Ga naar wallet
+        </button>
+      </div>
+    </div>
+
+    <button *ngIf="!orderCanceled && (paymentInProgress || !transactionMined) && !transactionInProgress" type="button" class="btn btn-danger btn-block"
+      (click)="cancelOrderAndExitModal()">
+      Annuleer bestelling
+    </button>
   </div>
   <div class="modal-footer">
-    <button *ngIf="orderCanceled" type="button" class="btn btn-danger" (click)="hideModal()">Ga terug</button>
+    <button *ngIf="orderCanceled || transactionInProgress || transactionMined" type="button" class="btn btn-danger" (click)="hideModal()">Sluit venster</button>
   </div>
 </clr-modal>

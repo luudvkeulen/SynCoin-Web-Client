@@ -1,3 +1,18 @@
+.modal-body {
+    text-align: center;
+}
+
+.progress-wrapper {
+  display: table;
+  min-height: 350px;
+  width: 100%;
+}
+
+.progress-wrapper .payment-received, .progress-wrapper .payment-in-progress, .progress-wrapper .awaiting-user-payment-confirmation {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .qr-code-wrapper {
     text-align: center;
 }
@@ -31,4 +46,9 @@ button.colorless, button.colorless:hover {
   background-color: #f26739;
   color: #ffffff;
   font-family: BastardusSans;
+}
+
+.qr img {
+  height: 350px;
+  width :350px;
 }

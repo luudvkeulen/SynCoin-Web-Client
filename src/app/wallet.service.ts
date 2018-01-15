@@ -38,6 +38,21 @@ export class WalletService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  payOrder(password: String, address: String, amount: Number, data: any, reference: string, socketId: string): Observable<any> {
+    return this
+      .httpService
+      .post('wallet/order', {
+        password,
+        address,
+        amount,
+        data,
+        reference,
+        socketId
+      }, true)
+      .map(result => result)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   getUserTransactions(): Observable<any> {
     return this
       .httpService
