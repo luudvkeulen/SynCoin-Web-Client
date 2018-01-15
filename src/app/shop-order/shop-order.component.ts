@@ -33,14 +33,14 @@ export class ShopOrderComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.params.subscribe(params => {
       this.orderId = params['id'];
 
-      this.shopService.getOrder(this.orderId).subscribe(order => {
-        console.log(order);
-
-        this.order = order;
-      });
+      this.refreshOrder();
     });
 
-    this.accountService.getData().subscribe(user => this.user = user);
+    this.accountService.getData().subscribe(user => {
+      this.user = user;
+
+      console.log(user);
+    });
   }
 
   ngOnDestroy() {
@@ -80,10 +80,20 @@ export class ShopOrderComponent implements OnInit, OnDestroy {
         this.showModal = false;
         this.txSuccess = true;
         this.txFailed = false;
+
+        this.refreshOrder();
       }, () => {
         this.showModal = false;
         this.txFailed = true;
         this.txSuccess = false;
       });
+  }
+
+  refreshOrder() {
+    this.shopService.getOrder(this.orderId).subscribe(order => {
+      console.log(order);
+
+      this.order = order;
+    });
   }
 }
