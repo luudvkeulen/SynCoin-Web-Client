@@ -14,3 +14,7 @@ h1 {
 .form-text{
   font-family: BastardusSans;
 }
+
+.heading.optional {
+  display: inline-block;
+}
