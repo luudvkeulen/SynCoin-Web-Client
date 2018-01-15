@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { ShopService } from '../shop.service';
 import { OrderRequest } from '../order-request';
 import { SocketService } from '../socket.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-shop-product',
@@ -23,6 +24,8 @@ export class ShopProductComponent implements OnInit {
   paymentNotConfirmedByUser: Boolean = true;
   transactionInProgress: Boolean = false;
   transactionMined: Boolean = false;
+
+  subscription: Subscription;
 
   constructor(
     private shopService: ShopService,
@@ -61,11 +64,12 @@ export class ShopProductComponent implements OnInit {
 
   hideModal() {
     this.showModal = false;
+    this.subscription.unsubscribe();
   }
 
   openPaymentPage() {
     this.paymentInProgress = true;
-    const subscription = this.socketService.awaitPayment()
+    this.subscription = this.socketService.awaitPayment()
       .subscribe(event => {
         if (event.type === 'connected') {
           localStorage.setItem('socket-id', event.data.id);
@@ -80,6 +84,7 @@ export class ShopProductComponent implements OnInit {
         this.paymentInProgress = false;
         this.transactionInProgress = false;
         this.transactionMined = true;
+        this.subscription.unsubscribe();
       });
   }
 }

@@ -44,6 +44,7 @@ export class SocketService {
       });
       socket.on('payment-received', () => {
         observer.complete();
+        socket.disconnect();
       });
       return {
         dispose: socket.disconnect
