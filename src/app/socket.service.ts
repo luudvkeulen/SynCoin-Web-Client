@@ -31,7 +31,16 @@ export class SocketService {
         ]
       });
       socket.on('connected', id => {
-        observer.next(id);
+        observer.next({
+          type: 'connected',
+          data: id
+        });
+      });
+      socket.on('user-sent-transaction', () => {
+        observer.next({
+          type: 'user-sent-transaction',
+          data: {}
+        })
       });
       socket.on('payment-received', () => {
         observer.complete();

@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.progress-wrapper .payment-received, .progress-wrapper .payment-in-progress {
+.progress-wrapper .payment-received, .progress-wrapper .payment-in-progress, .progress-wrapper .awaiting-user-payment-confirmation {
   display: table-cell;
   vertical-align: middle;
 }
