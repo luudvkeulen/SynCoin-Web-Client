@@ -34,6 +34,7 @@ import { AccountService } from './account.service';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { SocketService } from './socket.service';
+import {CollapseDirective} from './collapse-directive';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SocketService } from './socket.service';
     OrdersComponent,
     ShopOrderComponent,
     UserOrdersComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
+    CollapseDirective
   ],
   imports: [
     BrowserModule,

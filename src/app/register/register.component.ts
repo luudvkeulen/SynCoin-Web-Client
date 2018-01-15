@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from './password-validation';
 import {AccountService} from '../account.service';
-import { Collapse } from './../collapse';
+import { CollapseDirective } from '../collapse-directive';
 
 @Component({
   selector: 'app-register',

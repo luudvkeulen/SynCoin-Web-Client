@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { Observable } from 'rxjs/Rx';
 import { ShopService } from '../shop.service';
 import { OrderRequest } from '../order-request';
 import { SocketService } from '../socket.service';
@@ -16,14 +15,14 @@ export class ShopProductComponent implements OnInit {
   @Input() product: Product;
   paymentLink: string;
   order: OrderRequest;
-  showModal: boolean = false;
+  showModal= false;
 
-  orderCanceled: boolean = false;
+  orderCanceled= false;
 
-  paymentInProgress: Boolean = false;
-  paymentNotConfirmedByUser: Boolean = true;
-  transactionInProgress: Boolean = false;
-  transactionMined: Boolean = false;
+  paymentInProgress = false;
+  paymentNotConfirmedByUser = true;
+  transactionInProgress = false;
+  transactionMined = false;
 
   subscription: Subscription;
 
