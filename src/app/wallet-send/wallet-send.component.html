@@ -22,7 +22,7 @@
         <label>Overmaken</label>
         <div class="form-group">
           <label for="adres">Adres</label>
-          <input type="text" id="adres" placeholder="Typ of scan een adres" name="address" [(ngModel)]="qrCode">
+          <input type="text" id="adres" placeholder="Typ of scan een adres" name="address" [(ngModel)]="qrCode" [disabled]="isOrderPayment">
           <button type="button" class="btn btn-outline-danger" (click)="camOpen = !camOpen">
             <clr-icon shape="camera"></clr-icon>
           </button>
@@ -32,7 +32,7 @@
           *ngIf="camOpen"></qr-scanner>
         <div class="form-group">
           <label for="bedrag">Bedrag</label>
-          <input type="number" id="bedrag" name="amount" placeholder="Voer een bedrag in" [(ngModel)]="amount">
+          <input type="number" id="bedrag" name="amount" placeholder="Voer een bedrag in" [(ngModel)]="amount" [disabled]="isOrderPayment">
         </div>
         <div class="form-group">
           <button class="btn btn-danger" [disabled]="!isFormValid()" (click)="showModal = true">Bevestig betaling</button>

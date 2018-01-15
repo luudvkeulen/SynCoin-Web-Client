@@ -20,6 +20,8 @@ export class ShopProductComponent implements OnInit {
   orderCanceled: boolean = false;
   paymentReceived: Boolean = false;
 
+  paymentInProgress: Boolean = true;
+
   constructor(
     private shopService: ShopService,
     private socketService: SocketService) {
@@ -31,13 +33,14 @@ export class ShopProductComponent implements OnInit {
   resetOrder() {
     this.orderCanceled = false;
     this.paymentReceived = false;
+    this.paymentInProgress = false;
   }
 
   orderProduct() {
     this.shopService.createOrder([this.product])
       .subscribe(result => {
         this.order = result.json();
-        this.paymentLink = `${window.location.origin}/wallet/confirm-payment/${this.order.address}/${this.order.amount}/${this.order.data}`;
+        this.paymentLink = `${window.location.origin}/wallet/confirm-payment/${this.order.address}/${this.order.amount}/${this.order.data}/${this.order.reference}`;
         this.showModal = true;
         this.resetOrder();
       });
@@ -59,6 +62,7 @@ export class ShopProductComponent implements OnInit {
   openPaymentPage() {
     const subscription = this.socketService.awaitPayment()
       .subscribe(data => {
+        this.paymentInProgress = true;
         localStorage.setItem('socket-id', data.id);
         window.open(`${this.paymentLink}`);
       }, () => {
