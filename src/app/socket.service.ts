@@ -5,7 +5,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url: string = 'https://syncoin.luudvankeulen.nl/api';
+  private url: string = 'https://syncoin.syntouch.nl:8080';
 
   constructor(
     private accountService: AccountService
@@ -21,6 +21,7 @@ export class SocketService {
         query: {
           token: this.accountService.getToken()
         },
+        secure: true,
         transports: [
           'websocket',
           'flashsocket',
