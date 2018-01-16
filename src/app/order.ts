@@ -40,7 +40,7 @@ export class Order {
   }
 
   public canCancel(): boolean {
-    return this.isFunded() && !this.isReceived();
+    return this.isFunded() && !this.isReceived() && !this.isCanceled();
   }
 
   public getLastStatus(): string {
