@@ -18,7 +18,6 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { ShopOrderComponent } from './shop-order/shop-order.component';
 import { LoginGuard } from './login.guard';
-import { OrdersComponent } from './orders/orders.component';
 
 const appRoutes: Routes = [
   {

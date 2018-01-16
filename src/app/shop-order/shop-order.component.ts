@@ -15,8 +15,8 @@ import {WalletService} from '../wallet.service';
 export class ShopOrderComponent implements OnInit, OnDestroy {
   protected orderId: string;
   private routeSubscription: any;
-  protected user: User;
-  protected order: Order;
+  user: User;
+  order: Order;
 
   txFailed: Boolean = false;
   txSuccess: Boolean = false;
@@ -24,6 +24,7 @@ export class ShopOrderComponent implements OnInit, OnDestroy {
   address: String;
   amount: Number;
   data: String;
+  password = '';
 
   constructor(private route: ActivatedRoute, private accountService: AccountService,
     private shopService: ShopService, private walletService: WalletService) {

@@ -11,20 +11,21 @@ import { ShopService } from '../shop.service';
   providers: [WalletService]
 })
 export class WalletSendComponent implements OnInit {
-  amount: number = 0;
-  qrCode: string = '';
+  amount = 0;
+  qrCode = '';
   data: any = false;
-  socketId: string = '';
-  reference: string = '';
+  socketId = '';
+  reference = '';
+  password = '';
 
-  camOpen: Boolean = false;
+  camOpen = false;
 
-  txFailed: Boolean = false;
-  txSuccess: Boolean = false;
+  txFailed = false;
+  txSuccess = false;
 
-  showModal: Boolean = false;
+  showModal = false;
 
-  isOrderPayment: Boolean = false;
+  isOrderPayment = false;
 
   constructor(
     private walletService: WalletService,
