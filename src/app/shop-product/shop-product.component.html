@@ -37,27 +37,44 @@
       </div>
 
       <div *ngIf="transactionMined" class="payment-received">
-        <clr-icon shape="check" size="72" class="is-success"></clr-icon>
+        <clr-icon shape="check" style="width: 72px; height: 72px;" class="is-success"></clr-icon>
         <p>Uw transactie is verwerkt!</p>
       </div>
     </div>
 
-    <div *ngIf="!paymentInProgress || transactionMined">
-      <div class="qr-code-wrapper" *ngIf="(!orderCanceled && order) && !transactionMined">
-        <!-- If an order isn't known yet, don't try to set the values inside the div -->
-        <qr-code [value]="paymentLink" [size]="350" [backgroundAlpha]="0.0" class="qr"></qr-code>
-        <button (click)="openPaymentPage()" class="btn btn-danger btn-block">
-          Ga naar wallet
-        </button>
+    <!-- DIV BELOW used in production because websockets don't work behind NGINX -->
+    <div *ngIf="paymentInProgressNoWebsockets" class="progress-wrapper">
+      <div class="payment-in-progress">
+        <span class="spinner">
+          Loading...
+        </span>
+        <p>Uw transactie wordt verwerkt...</p>
       </div>
     </div>
 
-    <button *ngIf="!orderCanceled && (paymentInProgress || !transactionMined) && !transactionInProgress" type="button" class="btn btn-danger btn-block"
-      (click)="cancelOrderAndExitModal()">
-      Annuleer bestelling
-    </button>
+    <!-- DIV BELOW used in production because websockets don't work behind NGINX -->
+    <div *ngIf="!paymentInProgressNoWebsockets">
+      <div *ngIf="!paymentInProgress || transactionMined">
+        <div class="qr-code-wrapper" *ngIf="(!orderCanceled && order) && !transactionMined">
+          <!-- If an order isn't known yet, don't try to set the values inside the div -->
+          <qr-code [value]="paymentLink" [size]="350" [backgroundAlpha]="0.0" class="qr"></qr-code>
+          <button (click)="openPaymentPage()" class="btn btn-danger btn-block">
+            Ga naar wallet
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!paymentInProgressNoWebsockets">
+      <button *ngIf="!orderCanceled && (paymentInProgress || !transactionMined) && !transactionInProgress" type="button" class="btn btn-danger btn-block"
+        (click)="cancelOrderAndExitModal()">
+        Annuleer bestelling
+      </button>
+    </div>
   </div>
   <div class="modal-footer">
     <button *ngIf="orderCanceled || transactionInProgress || transactionMined" type="button" class="btn btn-danger" (click)="hideModal()">Sluit venster</button>
+    <!-- Used in production because websockets don't work behind NGINX -->
+    <button *ngIf="paymentInProgressNoWebsockets" type="button" class="btn btn-danger" (click)="hideModal()">Sluit venster</button>
   </div>
 </clr-modal>

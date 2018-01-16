@@ -11,7 +11,7 @@ export class SocketService {
     private accountService: AccountService
   ) {
     if (isDevMode()) {
-      this.url = 'http://localhost:8080';
+      this.url = 'localhost:8080';
     }
   }
 

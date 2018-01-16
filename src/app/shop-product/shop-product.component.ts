@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, isDevMode } from '@angular/core';
 import { Product } from '../product';
 import { ShopService } from '../shop.service';
 import { OrderRequest } from '../order-request';
@@ -15,9 +15,9 @@ export class ShopProductComponent implements OnInit {
   @Input() product: Product;
   paymentLink: string;
   order: OrderRequest;
-  showModal= false;
+  showModal = false;
 
-  orderCanceled= false;
+  orderCanceled = false;
 
   paymentInProgress = false;
   paymentNotConfirmedByUser = true;
@@ -25,6 +25,11 @@ export class ShopProductComponent implements OnInit {
   transactionMined = false;
 
   subscription: Subscription;
+
+
+
+  // For production when websockets don't work
+  paymentInProgressNoWebsockets: Boolean = false;
 
   constructor(
     private shopService: ShopService,
@@ -40,6 +45,8 @@ export class ShopProductComponent implements OnInit {
     this.paymentNotConfirmedByUser = true;
     this.transactionInProgress = false;
     this.transactionMined = false;
+
+    this.paymentInProgressNoWebsockets = false;
   }
 
   orderProduct() {
@@ -63,27 +70,36 @@ export class ShopProductComponent implements OnInit {
 
   hideModal() {
     this.showModal = false;
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   openPaymentPage() {
-    this.paymentInProgress = true;
-    this.subscription = this.socketService.awaitPayment()
-      .subscribe(event => {
-        if (event.type === 'connected') {
-          localStorage.setItem('socket-id', event.data.id);
-          window.open(`${this.paymentLink}`);
-        } else if (event.type === 'user-sent-transaction') {
-          this.paymentNotConfirmedByUser = false;
-          this.transactionInProgress = true;
-        }
-      }, () => {
-        window.open(this.paymentLink);
-      }, () => {
-        this.paymentInProgress = false;
-        this.transactionInProgress = false;
-        this.transactionMined = true;
-        this.subscription.unsubscribe();
-      });
+    // Websockets aren't fully functional behind an NGINX webserve (/ reverse proxy).
+    // Only use websockets on localhost.
+    if (isDevMode()) {
+      this.paymentInProgress = true;
+      this.subscription = this.socketService.awaitPayment()
+        .subscribe(event => {
+          if (event.type === 'connected') {
+            localStorage.setItem('socket-id', event.data.id);
+            window.open(`${this.paymentLink}`);
+          } else if (event.type === 'user-sent-transaction') {
+            this.paymentNotConfirmedByUser = false;
+            this.transactionInProgress = true;
+          }
+        }, () => {
+          window.open(this.paymentLink);
+        }, () => {
+          this.paymentInProgress = false;
+          this.transactionInProgress = false;
+          this.transactionMined = true;
+          this.subscription.unsubscribe();
+        });
+    } else {
+      this.paymentInProgressNoWebsockets = true;
+      window.open(this.paymentLink);
+    }
   }
 }
