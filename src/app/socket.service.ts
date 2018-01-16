@@ -5,7 +5,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url: string = 'https://syncoin.luudvankeulen.nl/api';
+  private url: string = 'https://syncoin.syntouch.nl/api';
 
   constructor(
     private accountService: AccountService

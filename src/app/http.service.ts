@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpService {
-  private url: string = 'https://syncoin.luudvankeulen.nl/api/';
+  private url: string = 'https://syncoin.syntouch.nl/api/';
 
   constructor(private http: Http) {
     if (isDevMode()) {
