@@ -1,7 +1,5 @@
-import {User} from './user';
-
 export class Order {
-  protected constructor(public id: string, public created: string, public user: User, public products: any[],
+  protected constructor(public id: string, public created: string, public user: any, public products: any[],
     public statusUpdates: any[]) {
   }
 
